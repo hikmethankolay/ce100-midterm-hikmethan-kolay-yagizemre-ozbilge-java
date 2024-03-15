@@ -18,6 +18,8 @@ echo Delete and Create the "release" folder and its contents
 rd /S /Q "release"
 mkdir release
 
+xcopy /E /I /Y "original_test_files" "rental-management-app"
+
 echo Change directory to rental-management-app
 cd rental-management-app
 
@@ -82,6 +84,18 @@ call copy README.md "rental-management-app\src\site\markdown\readme.md"
 cd rental-management-app
 echo Perform Maven site generation
 call mvn site
+
+del test1.bin
+del test2.bin
+del test3.bin
+del test4.bin
+del test5.bin
+del usertest.bin
+del user.bin
+del *_records.bin
+del *_test.bin
+del *_output.bin
+
 cd ..
 
 echo Package Output Jar Files

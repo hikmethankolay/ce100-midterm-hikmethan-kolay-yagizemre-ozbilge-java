@@ -1,8 +1,8 @@
 /**
 
-@file CalculatorAppTest.java
-@brief This file contains the test cases for the CalculatorApp class.
-@details This file includes test methods to validate the functionality of the CalculatorApp class. It uses JUnit for unit testing.
+@file RentalManagementAppTest.java
+@brief This file contains the test cases for the RentalManagementApp class.
+@details This file includes test methods to validate the functionality of the RentalManagementApp class. It uses JUnit for unit testing.
 */
 package com.project.RentalManagement;
 
@@ -22,12 +22,12 @@ import org.junit.Test;
 
 /**
 
-@class CalculatorAppTest
-@brief This class represents the test class for the CalculatorApp class.
-@details The CalculatorAppTest class provides test methods to verify the behavior of the CalculatorApp class. It includes test methods for successful execution, object creation, and error handling scenarios.
+@class RentalManagementAppTest
+@brief This class represents the test class for the RentalManagementApp class.
+@details The RentalManagementAppTest class provides test methods to verify the behavior of the CalculatorApp class. It includes test methods for successful execution, object creation, and error handling scenarios.
 @author ugur.coruh
 */
-public class CalculatorAppTest {
+public class RentalManagementAppTest {
 
   /**
    * @brief This method is executed once before all test methods.
