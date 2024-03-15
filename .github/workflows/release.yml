@@ -59,7 +59,7 @@ jobs:
         run: sudo apt-get install -y libxml2-utils
         shell: bash
 
-      - name: Copy original test files to rental-management-app
+      - name: Copy original test files to rental-management-app file
         run: xcopy /E /I /Y "original_test_files" "rental-management-app"
         shell: bash
 
