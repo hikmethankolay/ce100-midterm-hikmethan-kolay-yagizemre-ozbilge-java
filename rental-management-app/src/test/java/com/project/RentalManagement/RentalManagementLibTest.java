@@ -183,7 +183,7 @@ public class RentalManagementLibTest {
    */
   @Test
   public void testUserChangePasswordFail() {
-    assertEquals(fail, RentalManagementLib.user_change_password("recoverykey", "newpassword", "usertest.bin"));
+    assertEquals(fail, RentalManagementLib.user_change_password("recoverykeyyyy", "newpassword", "usertest.bin"));
   }
 
   /**

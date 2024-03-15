@@ -13,6 +13,7 @@
 package com.project.RentalManagementLib;
 import org.slf4j.LoggerFactory;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import ch.qos.logback.classic.Logger;
 /**
@@ -186,12 +187,12 @@ public class RentalManagementLib {
         lines.add(line);
       }
     } catch (IOException e) {
-      System.out.println("\nFile operation failed");
+      System.out.print("\nFile operation failed");
       return -1;
     }
 
     if (lineNumberToDelete < 1 || lineNumberToDelete > lines.size()) {
-      System.out.println("\nInvalid line number.");
+      System.out.print("\nInvalid line number.");
       return -1;
     }
 
@@ -205,12 +206,12 @@ public class RentalManagementLib {
         writer.newLine();
       }
     } catch (IOException e) {
-      System.out.println("\nFile operation failed");
+      System.out.print("\nFile operation failed");
       e.printStackTrace();
       return -1;
     }
 
-    System.out.println("\nData successfully deleted");
+    System.out.print("\nData successfully deleted");
     return 0;
   }
 
@@ -251,7 +252,7 @@ public class RentalManagementLib {
         }
       }
     } catch (IOException e) {
-      System.out.println("There is no user info, Please register first.");
+      System.out.print("There is no user info, Please register first.");
       return -1;
     }
 
@@ -266,10 +267,10 @@ public class RentalManagementLib {
     }
 
     if (username.equals(usernameRead) && password.equals(passwordRead)) {
-      System.out.println("\nLogin Successful");
+      System.out.print("\nLogin Successful");
       return 0;
     } else {
-      System.out.println("\nWrong username or password");
+      System.out.print("\nWrong username or password");
       return -1;
     }
   }
@@ -284,58 +285,52 @@ public class RentalManagementLib {
   public static int user_change_password(String recoveryKey, String newPassword, String userFile) {
     String usernameRead = "";
     String recoveryKeyRead = "";
-    BufferedReader br = null;
-    BufferedWriter bw = null;
+    String newLoginInfo;
+    int count = 0;
 
-    try {
-      br = new BufferedReader(new FileReader(userFile));
-      bw = new BufferedWriter(new FileWriter(userFile, false));
-      int count = 0;
-      int i;
+    if (!new File(userFile).exists()) {
+      System.out.print("There is no user info. Please register first.\n");
+      return -1;
+    }
 
-      while ((i = br.read()) != -1) {
-        char c = (char) i;
+    try (BufferedReader reader = new BufferedReader(new FileReader(userFile))) {
+      int data;
 
-        if (c == '/') {
+      while ((data = reader.read()) != -1) {
+        char character = (char) data;
+
+        if (character == '/') {
           count++;
           continue;
         }
 
         if (count == 0) {
-          usernameRead += c;
+          usernameRead += character;
         } else if (count == 1) {
-          continue; // Skip reading password
+          continue;
         } else if (count == 2) {
-          recoveryKeyRead += c;
+          recoveryKeyRead += character;
         }
-      }
-
-      if (recoveryKey.equals(recoveryKeyRead)) {
-        System.out.println("\nRecovery Key Approved");
-        bw.write(usernameRead + "/" + newPassword + "/" + recoveryKeyRead);
-        System.out.println("\nPassword changed successfully");
-        return 0;
-      } else {
-        System.out.println("\nWrong Recovery Key");
-        return -1;
       }
     } catch (IOException e) {
-      System.out.println("Error: " + e.getMessage());
-      return -1;
+      e.printStackTrace();
     }
 
-    finally {
-      try {
-        if (br != null) {
-          br.close();
-        }
+    if (recoveryKey.equals(recoveryKeyRead)) {
+      newLoginInfo = usernameRead + "/" + newPassword + "/" + recoveryKeyRead;
 
-        if (bw != null) {
-          bw.close();
-        }
+      try (OutputStream myFile = new FileOutputStream(userFile)) {
+        byte[] bytes = newLoginInfo.getBytes(StandardCharsets.UTF_8);
+        myFile.write(bytes, 0, bytes.length);
       } catch (IOException e) {
         e.printStackTrace();
       }
+
+      System.out.print("Password Change is Successful.\n");
+      return 0;
+    } else {
+      System.out.print("Wrong Recovery Key\n");
+      return -1;
     }
   }
   /**
@@ -351,9 +346,13 @@ public class RentalManagementLib {
   */
   public static int user_register(String newUsername, String newPassword, String newRecoveryKey, String userFile) {
     try {
-      BufferedWriter bw = new BufferedWriter(new FileWriter(userFile, false));
-      bw.write(newUsername + "/" + newPassword + "/" + newRecoveryKey);
-      bw.close();
+      // Create FileOutputStream with userFile
+      FileOutputStream fileOutputStream = new FileOutputStream(userFile);
+      // Write the user information with a separator (e.g., newline character)
+      String userInfo = newUsername + "/" + newPassword + "/" + newRecoveryKey;
+      fileOutputStream.write(userInfo.getBytes());
+      // Close the stream
+      fileOutputStream.close();
       System.out.println("\nRegister is successful and all previous records are deleted.");
       return 0;
     } catch (IOException e) {
