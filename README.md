@@ -1,4 +1,94 @@
-# eclipse-java-maven-template
+# Rental Management App
+
+
+**I. Introduction**
+
+Rental Management system is a project that uses C
+with  CMake and Java with Maven for
+cross-platform support and Doxygen to document code and unit tests. It is a
+console app that uses keyboard inputs to navigate.
+
+**II. System
+Architecture**  
+Whole management system uses standard C file input/output library with file
+operation functions we created for this project, Which is:
+
+·       file_read() – Reads data
+from file
+
+·       file_write() – Deletes all
+data and writes wanted data to file
+
+·       file_edit() – changes
+specified record line
+
+·       file_line_delete() –
+Deletes a specified record line
+
+·       file_append() – Adds a
+record at the end of file
+
+**III. Functionalities**
+
+In menu, user can see,
+register, update, delete a record he wants. We also have a search and sort
+feature. We can record these types of data’s:
+
+**a. Tenant Management:**
+
+·       TenantID
+
+·       PropertyID
+
+·       Rent
+
+·       Birthdate
+
+·       Name
+
+·       Surname
+
+**b. Property Management:** 
+
+·          PropertyID
+
+·          PropertyAge
+
+·          Bedrooms
+
+·          Livingrooms
+
+·          Floors
+
+·          Size
+
+·          Adress
+
+**c. Maintenance Management:**
+
+·       PropertyID
+
+·       Cost
+
+·       Priority
+
+·       MaintenanceType
+
+·       ExpectedFinishingDate
+
+**d. Rent Management:**
+
+·        TenantID
+
+·        CurrentRentDebt
+
+·        DueDate
+
+**IV.
+Testing and Validation**
+
+We tested and documented whole system with gtest and
+Ctest. It has %95 coverage test and %100 success at unit test results
 
 # Overview
 

@@ -19,7 +19,7 @@
 	<version position="right" />
 
 	<bannerLeft>
-		<name>Calculator Application</name>
+		<name>Rental Management Application</name>
 		<src>images/logo.png</src>
 		<href>https://github.com/ucoruh/eclipse-java-maven-template</href>
 	</bannerLeft>
@@ -34,7 +34,7 @@
 	</poweredBy>
 
 	<body>
-		<head>Calculator App</head>
+		<head>Rental Management App</head>
 		<!-- Add any additional meta tags, CSS files, or JavaScript files -->
 
 		<menu name="Overview">
@@ -44,7 +44,7 @@
 				<item name="Project Info" href="project-info.html" />
 				<item name="Project Summary" href="summary.html" />
 				<item name="Project Team" href="team.html" />
-				<item name="GitHub Repository" href="https://github.com/ucoruh/eclipse-java-maven-template" />
+				<item name="GitHub Repository" href="https://github.com/hikmethankolay/ce100-midterm-hikmethan-kolay-yagizemre-ozbilge-java" />
 		</menu>
 
 		<menu name="Development">

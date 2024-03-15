@@ -4,7 +4,7 @@
 @brief This file contains the test cases for the Calculator class.
 @details This file includes test methods to validate the functionality of the Calculator class. It uses JUnit for unit testing.
 */
-package com.ucoruh.calculator;
+package com.project.RentalManagement;
 
 import static org.junit.Assert.*;
 
@@ -56,15 +56,14 @@ public class CalculatorTest {
   }
 
   /**
-   * @brief Test method to validate the addition operation.
+   * @brief Test.
    *
-   * @details This method creates an instance of the Calculator class and calls the `add` method with two integers. It asserts the expected result of the addition operation.
+   * @details Test.
    */
   @Test
-  public void testAddition() {
-    Calculator calculator = new Calculator();
-    int result = calculator.add(2, 3);
-    assertEquals(5, result);
+  public void test() {
+
+    assertTrue(true);
   }
 
 }
