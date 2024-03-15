@@ -175,7 +175,7 @@ public class RentalManagementLibTest {
        */
   @Test
   public void testUserLoginFail() {
-    assertEquals(fail, user_login("username", "passwordaa", "usertest.bin"));
+    assertEquals(fail, RentalManagementLib.user_login("username", "passwordaa", "usertest.bin"));
   }
 
   /**
@@ -183,7 +183,7 @@ public class RentalManagementLibTest {
    */
   @Test
   public void testUserChangePasswordFail() {
-    assertEquals(fail, user_change_password("recoverykey", "newpassword", "usertest.bin"));
+    assertEquals(fail, RentalManagementLib.user_change_password("recoverykey", "newpassword", "usertest.bin"));
   }
 
   /**
@@ -193,7 +193,7 @@ public class RentalManagementLibTest {
   public void testUserRegister() {
     String testString = "username/password/recoverykey";
     user_register("username", "password", "recoverykey", "usertest.bin");
-    assertEquals(testString, file_read("usertest.bin", 'N'));
+    assertEquals(testString, RentalManagementLib.file_read("usertest.bin", 'N'));
   }
 
   /**
@@ -201,7 +201,7 @@ public class RentalManagementLibTest {
    */
   @Test
   public void testUserLogin() {
-    assertEquals(success, user_login("username", "password", "usertest.bin"));
+    assertEquals(success, RentalManagementLib.user_login("username", "password", "usertest.bin"));
   }
 
   /**
@@ -209,7 +209,7 @@ public class RentalManagementLibTest {
    */
   @Test
   public void testUserLoginFail_2() {
-    assertEquals(fail, user_login("usernameaa", "passwordaa", "usertest.bin"));
+    assertEquals(fail, RentalManagementLib.user_login("usernameaa", "passwordaa", "usertest.bin"));
   }
 
   /**
@@ -217,7 +217,7 @@ public class RentalManagementLibTest {
    */
   @Test
   public void testUserChangePassword() {
-    assertEquals(success, user_change_password("recoverykey", "newpassword", "usertest.bin"));
+    assertEquals(success, RentalManagementLib.user_change_password("recoverykey", "newpassword", "usertest.bin"));
   }
 
   /**
@@ -225,7 +225,7 @@ public class RentalManagementLibTest {
    */
   @Test
   public void testUserChangePasswordFail_2() {
-    assertEquals(fail, user_change_password("recoverykeyaa", "newpassword", "usertest.bin"));
+    assertEquals(fail, RentalManagementLib.user_change_password("recoverykeyaa", "newpassword", "usertest.bin"));
   }
 
 }
