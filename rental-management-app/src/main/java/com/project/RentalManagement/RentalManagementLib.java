@@ -349,7 +349,7 @@ public class RentalManagementLib {
   * @return 0 on success.
   * @return -1 on fail.
   */
-  public static int userRegister(String newUsername, String newPassword, String newRecoveryKey, String userFile) {
+  public static int user_register(String newUsername, String newPassword, String newRecoveryKey, String userFile) {
     try {
       BufferedWriter bw = new BufferedWriter(new FileWriter(userFile, false));
       bw.write(newUsername + "/" + newPassword + "/" + newRecoveryKey);
