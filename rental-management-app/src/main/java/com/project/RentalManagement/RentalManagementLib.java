@@ -214,4 +214,152 @@ public class RentalManagementLib {
     return 0;
   }
 
+  /**
+   * @brief This function is for user login
+   *
+   * Function reads user.bin file and checks if username and password match with inputted username and password
+   * @param username username.
+   * @param password password.
+   * @param user_file file that contains user info.
+   * @return 0 on success.
+   * @return -1 on fail.
+  */
+  public static int user_login(String username, String password, String userFile) {
+    String usernameRead = "";
+    String passwordRead = "";
+    BufferedReader br = null;
+
+    try {
+      br = new BufferedReader(new FileReader(userFile));
+      int count = 0;
+      int i;
+
+      while ((i = br.read()) != -1) {
+        char c = (char) i;
+
+        if (c == '/') {
+          count++;
+          continue;
+        }
+
+        if (count == 0) {
+          usernameRead += c;
+        } else if (count == 1) {
+          passwordRead += c;
+        } else if (count == 2) {
+          break;
+        }
+      }
+    } catch (IOException e) {
+      System.out.println("There is no user info, Please register first.");
+      return -1;
+    }
+
+    finally {
+      try {
+        if (br != null) {
+          br.close();
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    if (username.equals(usernameRead) && password.equals(passwordRead)) {
+      System.out.println("\nLogin Successful");
+      return 0;
+    } else {
+      System.out.println("\nWrong username or password");
+      return -1;
+    }
+  }
+  /**
+   * @brief This function changes the password of a user.
+   * @param recovery_key recovery_key.
+   * @param new_password new password.
+   * @param user_file file that contains user info.
+   * @return 0 on success.
+   * @return -1 on fail.
+  */
+  public static int user_change_password(String recoveryKey, String newPassword, String userFile) {
+    String usernameRead = "";
+    String recoveryKeyRead = "";
+    BufferedReader br = null;
+    BufferedWriter bw = null;
+
+    try {
+      br = new BufferedReader(new FileReader(userFile));
+      bw = new BufferedWriter(new FileWriter(userFile, false));
+      int count = 0;
+      int i;
+
+      while ((i = br.read()) != -1) {
+        char c = (char) i;
+
+        if (c == '/') {
+          count++;
+          continue;
+        }
+
+        if (count == 0) {
+          usernameRead += c;
+        } else if (count == 1) {
+          continue; // Skip reading password
+        } else if (count == 2) {
+          recoveryKeyRead += c;
+        }
+      }
+
+      if (recoveryKey.equals(recoveryKeyRead)) {
+        System.out.println("\nRecovery Key Approved");
+        bw.write(usernameRead + "/" + newPassword + "/" + recoveryKeyRead);
+        System.out.println("\nPassword changed successfully");
+        return 0;
+      } else {
+        System.out.println("\nWrong Recovery Key");
+        return -1;
+      }
+    } catch (IOException e) {
+      System.out.println("Error: " + e.getMessage());
+      return -1;
+    }
+
+    finally {
+      try {
+        if (br != null) {
+          br.close();
+        }
+
+        if (bw != null) {
+          bw.close();
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  /**
+  * @brief This function is for user register
+  *
+  * Function creates a user file in binary format and writes inputted username and password in it. Additionally deletes all previous records.
+  * @param new_username new username.
+  * @param new_password new password.
+  * @param new_recovery_key new recovery key
+  * @param user_file file that contains user info.
+  * @return 0 on success.
+  * @return -1 on fail.
+  */
+  public static int userRegister(String newUsername, String newPassword, String newRecoveryKey, String userFile) {
+    try {
+      BufferedWriter bw = new BufferedWriter(new FileWriter(userFile, false));
+      bw.write(newUsername + "/" + newPassword + "/" + newRecoveryKey);
+      bw.close();
+      System.out.println("\nRegister is successful and all previous records are deleted.");
+      return 0;
+    } catch (IOException e) {
+      System.out.println("Error: " + e.getMessage());
+      return -1;
+    }
+  }
+
 }
