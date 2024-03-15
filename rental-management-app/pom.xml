@@ -6,12 +6,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<!-- The Basics -->
 	<groupId>com.project.RentalManagement</groupId>
-	<artifactId>rentalmanagement-app</artifactId>
+	<artifactId>rental-management-app</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<!-- More Project Information -->
-	<name>rentalmanagement-app</name>
+	<name>rental-management-app</name>
 	<url>https://github.com/hikmethankolay/ce100-midterm-hikmethan-kolay-yagizemre-ozbilge-java</url>
 	<scm>
 		<url>https://github.com/hikmethankolay/ce100-midterm-hikmethan-kolay-yagizemre-ozbilge-java</url>
