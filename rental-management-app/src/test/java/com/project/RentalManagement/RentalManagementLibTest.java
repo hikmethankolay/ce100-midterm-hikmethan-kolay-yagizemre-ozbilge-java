@@ -192,7 +192,7 @@ public class RentalManagementLibTest {
   @Test
   public void testUserRegister() {
     String testString = "username/password/recoverykey";
-    user_register("username", "password", "recoverykey", "usertest.bin");
+    RentalManagementLib.user_register("username", "password", "recoverykey", "usertest.bin");
     assertEquals(testString, RentalManagementLib.file_read("usertest.bin", 'N'));
   }
 
