@@ -60,7 +60,7 @@ jobs:
         shell: bash
 
       - name: Copy original test files to rental-management-app file
-        run: xcopy /E /I /Y "original_test_files" "rental-management-app"
+        run: cp -R original_test_files/* rental-management-app/
         shell: bash
 
       - name: Perform Maven clean, test, and packaging
@@ -160,7 +160,7 @@ jobs:
           prerelease: false
       
       - name: delete test files
-        run: del test1.bin && del test2.bin && del test3.bin && del test4.bin && del test5.bin && del usertest.bin && del user.bin && del *_records.bin && del *_test.bin && del *_output.bin
+        run: rm test1.bin test2.bin test3.bin test4.bin test5.bin usertest.bin user.bin *_records.bin *_test.bin *_output.bin
         shell: bash
         working-directory: ./rental-management-app
 
