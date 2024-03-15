@@ -7,12 +7,13 @@
 package com.project.RentalManagement;
 
 import static org.junit.Assert.*;
-
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import com.project.RentalManagementLib.RentalManagementLib;
 
@@ -23,6 +24,7 @@ import com.project.RentalManagementLib.RentalManagementLib;
 @details The RentalManagementLibTest class provides test methods to verify the behavior of the RentalManagementLib class. It includes test methods for addition, subtraction, multiplication, and division operations.
 @author hikmethankolay
 */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RentalManagementLibTest {
 
   /**
@@ -171,26 +173,10 @@ public class RentalManagementLibTest {
   }
 
   /**
-       * Tests the user_login function in a fail case.
-       */
-  @Test
-  public void testUserLoginFail() {
-    assertEquals(fail, RentalManagementLib.user_login("username", "passwordaa", "usertest.bin"));
-  }
-
-  /**
-   * Tests the user_change_password function in a fail case.
-   */
-  @Test
-  public void testUserChangePasswordFail() {
-    assertEquals(fail, RentalManagementLib.user_change_password("recoverykeyyyy", "newpassword", "usertest.bin"));
-  }
-
-  /**
    * Tests the user_register function.
    */
   @Test
-  public void testUserRegister() {
+  public void testUser01_Register() {
     String testString = "username/password/recoverykey";
     RentalManagementLib.user_register("username", "password", "recoverykey", "usertest.bin");
     assertEquals(testString, RentalManagementLib.file_read("usertest.bin", 'N'));
@@ -200,31 +186,47 @@ public class RentalManagementLibTest {
    * Tests the user_login function.
    */
   @Test
-  public void testUserLogin() {
+  public void testUser02_Login() {
     assertEquals(success, RentalManagementLib.user_login("username", "password", "usertest.bin"));
-  }
-
-  /**
-   * Tests the user_login function in a fail case.
-   */
-  @Test
-  public void testUserLoginFail_2() {
-    assertEquals(fail, RentalManagementLib.user_login("usernameaa", "passwordaa", "usertest.bin"));
   }
 
   /**
    * Tests the user_change_password function.
    */
   @Test
-  public void testUserChangePassword() {
+  public void testUser03_ChangePassword() {
     assertEquals(success, RentalManagementLib.user_change_password("recoverykey", "newpassword", "usertest.bin"));
+  }
+
+  /**
+   * Tests the user_login function in a fail case.
+   */
+  @Test
+  public void testUser04_LoginFail() {
+    assertEquals(fail, RentalManagementLib.user_login("username", "passwordaa", "usertest.bin"));
+  }
+
+  /**
+   * Tests the user_login function in a fail case.
+   */
+  @Test
+  public void testUser05_LoginFail_2() {
+    assertEquals(fail, RentalManagementLib.user_login("usernameaa", "passwordaa", "usertest.bin"));
   }
 
   /**
    * Tests the user_change_password function in a fail case.
    */
   @Test
-  public void testUserChangePasswordFail_2() {
+  public void testUser06_ChangePasswordFail() {
+    assertEquals(fail, RentalManagementLib.user_change_password("recoverykeyyyy", "newpassword", "usertest.bin"));
+  }
+
+  /**
+   * Tests the user_change_password function in a fail case.
+   */
+  @Test
+  public void testUser07_ChangePasswordFail_2() {
     assertEquals(fail, RentalManagementLib.user_change_password("recoverykeyaa", "newpassword", "usertest.bin"));
   }
 

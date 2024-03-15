@@ -285,51 +285,51 @@ public class RentalManagementLib {
   public static int user_change_password(String recoveryKey, String newPassword, String userFile) {
     String usernameRead = "";
     String recoveryKeyRead = "";
-    String newLoginInfo;
     int count = 0;
 
-    if (!new File(userFile).exists()) {
-      System.out.print("There is no user info. Please register first.\n");
-      return -1;
-    }
+    try {
+      BufferedReader reader = new BufferedReader(new FileReader(userFile));
+      int i;
 
-    try (BufferedReader reader = new BufferedReader(new FileReader(userFile))) {
-      int data;
+      while ((i = reader.read()) != -1) {
+        char ch = (char) i;
 
-      while ((data = reader.read()) != -1) {
-        char character = (char) data;
-
-        if (character == '/') {
+        if (ch == '/') {
           count++;
           continue;
         }
 
         if (count == 0) {
-          usernameRead += character;
+          usernameRead += ch;
         } else if (count == 1) {
-          continue;
+          continue; // Skip reading password
         } else if (count == 2) {
-          recoveryKeyRead += character;
+          recoveryKeyRead += ch;
         }
       }
+
+      reader.close();
     } catch (IOException e) {
-      e.printStackTrace();
+      System.out.println("\nThere is no user info, Please register first.");
+      return -1;
     }
 
     if (recoveryKey.equals(recoveryKeyRead)) {
-      newLoginInfo = usernameRead + "/" + newPassword + "/" + recoveryKeyRead;
+      System.out.println("\nRecovery Key Approved");
 
-      try (OutputStream myFile = new FileOutputStream(userFile)) {
-        byte[] bytes = newLoginInfo.getBytes(StandardCharsets.UTF_8);
-        myFile.write(bytes, 0, bytes.length);
+      try {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(userFile));
+        writer.write(usernameRead + "/" + newPassword + "/" + recoveryKeyRead);
+        writer.close();
       } catch (IOException e) {
         e.printStackTrace();
+        return -1;
       }
 
-      System.out.print("Password Change is Successful.\n");
+      System.out.println("\nPassword changed successfully");
       return 0;
     } else {
-      System.out.print("Wrong Recovery Key\n");
+      System.out.println("\nWrong Recovery Key");
       return -1;
     }
   }
