@@ -904,24 +904,86 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int add_tenant_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	    System.out.print("\nPlease enter TenantID:");
+	    int tenantID = scanner.nextInt();
+	    System.out.print("\nPlease enter PropertyID:");
+	    int propertyID = scanner.nextInt();
+	    System.out.print("\nPlease enter Rent:");
+	    int rent = scanner.nextInt();
+	    System.out.print("\nPlease enter BirthDate:");
+	    String birthdate = scanner.nextLine();
+	    System.out.print("\nPlease enter Name:");
+	    String name = scanner.nextLine();
+	    System.out.print("\nPlease enter Surname:");
+	    String surname = scanner.nextLine();
+	    scanner.nextLine(); // Consume newline left-over
+	    String formattedRecord = String.format("TenantID:%d / PropertyID:%d / Rent:%d / Birthdate:%s / Name:%s / Surname:%s",
+	                                           tenantID,propertyID, rent, birthdate, name, surname);
+	    File file = new File("tenant_records.bin");
+
+	    if (!file.exists()) {
+	      file_write("tenant_records.bin",formattedRecord);
+	      scanner.close();
+	      return 0;
+	    } else {
+	      file_append("tenant_records.bin",formattedRecord);
+	      scanner.close();
+	      return 0;
+	    }
+	  }
   /**
    * @brief edit teneat record.
    *
    * @return 0.
    */
   public static int edit_tenant_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	  System.out.print("\nPlease enter record number to edit:");
+	    int RecordNumberToEdit = scanner.nextInt();
+	    System.out.print("\nPlease enter TenantID:");
+	    int tenantID = scanner.nextInt();
+	    System.out.print("\nPlease enter PropertyID:");
+	    int propertyID = scanner.nextInt();
+	    System.out.print("\nPlease enter Rent:");
+	    int rent = scanner.nextInt();
+	    System.out.print("\nPlease enter BirthDate:");
+	    String birthdate = scanner.nextLine();
+	    System.out.print("\nPlease enter Name:");
+	    String name = scanner.nextLine();
+	    System.out.print("\nPlease enter Surname:");
+	    String surname = scanner.nextLine();
+	    scanner.nextLine(); // Consume newline left-over
+	    String formattedRecord = String.format("TenantID:%d / PropertyID:%d / Rent:%d / Birthdate:%s / Name:%s / Surname:%s",
+	                                           tenantID,propertyID, rent, birthdate, name, surname);
+	  if (file_edit("tenant_records.bin", RecordNumberToEdit, formattedRecord) == 0) {
+	      scanner.close();
+	      return 0;
+	    } else {
+	      scanner.close();
+	      return -1;
+	    }
+	  }
   /**
    * @brief delete teneat record.
    *
    * @return 0.
    */
   public static int delete_tenant_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	    System.out.print("\nPlease enter record number to delete:");
+	    int RecordNumberToDelete = scanner.nextInt();
+
+	    if (file_line_delete("tenant_records.bin", RecordNumberToDelete) == 0) {
+	      scanner.close();
+	      return 0;
+	    } else {
+	      scanner.close();
+	      return -1;
+	    }
+	  }
+  
+    
   /**
    * @brief sort teneat record.
    *
@@ -1007,24 +1069,71 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int add_rent_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	    System.out.print("\nPlease enter TenantID:");
+	    int tenantID = scanner.nextInt();
+	    System.out.print("\nPlease enter CurrentRentDebt:");
+	    int currentrentdebt = scanner.nextInt();
+	    System.out.print("\nPlease enter DueDate:");
+	    String duedate = scanner.nextLine();
+	    scanner.nextLine(); // Consume newline left-over
+	    String formattedRecord = String.format("TenantID:%d / CurrentRentDebt:%d / DueDate:%s",tenantID,currentrentdebt,duedate);
+	    File file = new File("rent_records.bin");
+
+	    if (!file.exists()) {
+	      file_write("rent_records.bin",formattedRecord);
+	      scanner.close();
+	      return 0;
+	    } else {
+	      file_append("rent_records.bin",formattedRecord);
+	      scanner.close();
+	      return 0;
+	    }
+	  }
   /**
    * @brief edit rent record.
    *
    * @return 0.
    */
   public static int edit_rent_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	  System.out.print("\nPlease enter record number to edit:");
+	    int RecordNumberToEdit = scanner.nextInt();
+	    System.out.print("\nPlease enter TenantID:");
+	    int tenantID = scanner.nextInt();
+	    System.out.print("\nPlease enter CurrentRentDebt:");
+	    int currentrentdebt = scanner.nextInt();
+	    System.out.print("\nPlease enter DueDate:");
+	    String duedate = scanner.nextLine();
+	    scanner.nextLine(); // Consume newline left-over
+	    String formattedRecord = String.format("TenantID:%d / CurrentRentDebt:%d / DueDate:%s",tenantID,currentrentdebt,duedate);
+	    
+	  if (file_edit("rent_records.bin", RecordNumberToEdit, formattedRecord) == 0) {
+	      scanner.close();
+	      return 0;
+	    } else {
+	      scanner.close();
+	      return -1;
+	    }
+	  }
   /**
    * @brief delete rent record.
    *
    * @return 0.
    */
   public static int delete_rent_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	    System.out.print("\nPlease enter record number to delete:");
+	    int RecordNumberToDelete = scanner.nextInt();
+
+	    if (file_line_delete("rent_records.bin", RecordNumberToDelete) == 0) {
+	      scanner.close();
+	      return 0;
+	    } else {
+	      scanner.close();
+	      return -1;
+	    }
+	  }
   /**
    * @brief sort rent record.
    *
@@ -1108,24 +1217,79 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int add_maintenance_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	    System.out.print("\nPlease enter PropertyID:");
+	    int propertyID = scanner.nextInt();
+	    System.out.print("\nPlease enter Cost:");
+	    int cost = scanner.nextInt();
+	    System.out.print("\nPlease enter Priority:");
+	    int priority = scanner.nextInt();
+	    System.out.print("\nPlease enter MaintenanceType:");
+	    String maintenancetype = scanner.nextLine();
+	    System.out.print("\nPlease enter ExpectedFinishingDate:");
+	    String expectedfinishingdate = scanner.nextLine();
+	    String formattedRecord = String.format("PropertyID:%d / Cost:%d / Priority:%d / MaintenanceType:%s / ExpectedFinishingDate:%s",
+	                                           propertyID, cost, priority, maintenancetype, expectedfinishingdate);
+	    File file = new File("maintenance_records.bin");
+
+	    if (!file.exists()) {
+	      file_write("maintenance_records.bin",formattedRecord);
+	      scanner.close();
+	      return 0;
+	    } else {
+	      file_append("maintenance_records.bin",formattedRecord);
+	      scanner.close();
+	      return 0;
+	    }
+	  }
   /**
    * @brief edit maintenance record.
    *
    * @return 0.
    */
   public static int edit_maintenance_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	  System.out.print("\nPlease enter record number to edit:");
+	    int RecordNumberToEdit = scanner.nextInt();
+	    System.out.print("\nPlease enter PropertyID:");
+	    int propertyID = scanner.nextInt();
+	    System.out.print("\nPlease enter Cost:");
+	    int cost = scanner.nextInt();
+	    System.out.print("\nPlease enter Priority:");
+	    int priority = scanner.nextInt();
+	    System.out.print("\nPlease enter MaintenanceType:");
+	    String maintenancetype = scanner.nextLine();
+	    System.out.print("\nPlease enter ExpectedFinishingDate:");
+	    String expectedfinishingdate = scanner.nextLine();
+	    String formattedRecord = String.format("PropertyID:%d / Cost:%d / Priority:%d / MaintenanceType:%s / ExpectedFinishingDate:%s",
+	                                           propertyID, cost, priority, maintenancetype, expectedfinishingdate);
+	    
+	    if (file_edit("maintenance_records.bin", RecordNumberToEdit, formattedRecord) == 0) {
+		      scanner.close();
+		      return 0;
+		    } else {
+		      scanner.close();
+		      return -1;
+		    }
+  }      
   /**
    * @brief delete maintenance record.
    *
    * @return 0.
    */
   public static int delete_maintenance_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	    System.out.print("\nPlease enter record number to delete:");
+	    int RecordNumberToDelete = scanner.nextInt();
+
+	    if (file_line_delete("maintenance_records.bin", RecordNumberToDelete) == 0) {
+	      scanner.close();
+	      return 0;
+	    } else {
+	      scanner.close();
+	      return -1;
+	    }
+	  }
   /**
    * @brief sort maintenance record.
    *
