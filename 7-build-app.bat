@@ -94,6 +94,7 @@ del usertest.bin
 del user.bin
 del *_records.bin
 del *_test.bin
+del *_test.txt
 del *_output.bin
 
 cd ..

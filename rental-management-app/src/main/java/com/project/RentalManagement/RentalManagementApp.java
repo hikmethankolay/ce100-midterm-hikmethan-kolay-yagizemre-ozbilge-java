@@ -68,7 +68,7 @@ public class RentalManagementApp {
       int choiceLoginMenu = scanner.nextInt();
 
       if (choiceLoginMenu == LoginMenuVariables.loginMenuLogin) {
-        Rental.loginMenu();
+        Rental.mainMenu();
       } else if (choiceLoginMenu == LoginMenuVariables.loginMenuRegister) {
         Rental.registerMenu();
       } else if (choiceLoginMenu == LoginMenuVariables.loginMenuPasswordReset) {

@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import ch.qos.logback.classic.Logger;
@@ -1600,60 +1599,45 @@ public class RentalManagementLib {
     scanner.close();
     return 0;
   }
-  /**
-   * @brief main menu.
-   *
-   * @return 0.
-   */
-  public int mainMenu() {
-    Scanner scanner = new Scanner(System.in);
-
-    while (true) {
-      System.out.print("\n--------Main Menu--------");
-      System.out.print("\n1-)Properties");
-      System.out.print("\n2-)Tenants");
-      System.out.print("\n3-)Rent Tracking");
-      System.out.print("\n4-)Maintenance Tracking");
-      System.out.print("\n5-)Log out");
-      System.out.print("\nPlease enter a choice: ");
-      int choiceMainMenu = scanner.nextInt();
-
-      if (choiceMainMenu == MainMenuVariables.mainMenuProperty) {
-        propertiesMenu();
-      } else if (choiceMainMenu == MainMenuVariables.mainMenuTenant) {
-        tenantsMenu();
-      } else if (choiceMainMenu == MainMenuVariables.mainMenuRentTracking) {
-        rentsMenu();
-      } else if (choiceMainMenu == MainMenuVariables.mainMenuMaintenance) {
-        maintenanceMenu();
-      } else if (choiceMainMenu == MainMenuVariables.mainMenuLogOut) {
-        break;
-      } else {
-        System.out.print("\nPlease input a correct choice.");
-      }
-    }
-
-    scanner.close();
-    return 0;
-  }
 
   /**
    * @brief Displays the login menu, allowing the user to log in.
    *
    * @return 0 indicating the process completed.
    */
-  public int loginMenu() {
+  public int mainMenu() {
     Scanner scanner = new Scanner(System.in);
-    String userName = "";
-    String password = "";
     String userFile = "user.bin";
-    System.out.print("Please enter your username: ");
-    userName = scanner.next();
+    System.out.print("\nPlease enter your username: ");
+    String userName = scanner.next();
     System.out.print("\nPlease enter your password: ");
-    password = scanner.next();
+    String password = scanner.next();
 
     if (user_login(userName, password, userFile) == 0) {
-      mainMenu();
+      while (true) {
+        System.out.print("\n--------Main Menu--------");
+        System.out.print("\n1-)Properties");
+        System.out.print("\n2-)Tenants");
+        System.out.print("\n3-)Rent Tracking");
+        System.out.print("\n4-)Maintenance Tracking");
+        System.out.print("\n5-)Log out");
+        System.out.print("\nPlease enter a choice: ");
+        int choiceMainMenu = scanner.nextInt();
+
+        if (choiceMainMenu == MainMenuVariables.mainMenuProperty) {
+          propertiesMenu();
+        } else if (choiceMainMenu == MainMenuVariables.mainMenuTenant) {
+          tenantsMenu();
+        } else if (choiceMainMenu == MainMenuVariables.mainMenuRentTracking) {
+          rentsMenu();
+        } else if (choiceMainMenu == MainMenuVariables.mainMenuMaintenance) {
+          maintenanceMenu();
+        } else if (choiceMainMenu == MainMenuVariables.mainMenuLogOut) {
+          break;
+        } else {
+          System.out.print("\nPlease input a correct choice.");
+        }
+      }
     }
 
     scanner.close();
@@ -1668,20 +1652,16 @@ public class RentalManagementLib {
    */
   public int registerMenu() {
     Scanner scanner = new Scanner(System.in);
-    String userName = "";
-    String password = "";
-    String recoveryKey = "";
     String userFile = "user.bin";
-    char warning;
-    System.out.print("Please enter your new username: ");
-    userName = scanner.next();
+    System.out.print("\nPlease enter your new username: ");
+    String userName = scanner.next();
     System.out.print("\nPlease enter your new password: ");
-    password = scanner.next();
+    String password = scanner.next();
     System.out.print("\nPlease enter your new recovery key: ");
-    recoveryKey = scanner.next();
+    String recoveryKey = scanner.next();
     System.out.print("\n------------WARNING------------");
     System.out.print("\nThis process will delete all previous records, do you still wish to proceed?[Y/n]: ");
-    warning = scanner.next().charAt(0);
+    char warning = scanner.next().charAt(0);
 
     if (warning == 'Y') {
       user_register(userName, password, recoveryKey, userFile);
@@ -1699,13 +1679,11 @@ public class RentalManagementLib {
    */
   public int changePasswordMenu() {
     Scanner scanner = new Scanner(System.in);
-    String password = "";
-    String recoveryKey = "";
     String userFile = "user.bin";
     System.out.print("\nPlease enter your recovery key: ");
-    recoveryKey = scanner.next();
+    String recoveryKey = scanner.next();
     System.out.print("\nPlease enter your new password: ");
-    password = scanner.next();
+    String password = scanner.next();
     user_change_password(recoveryKey, password, userFile);
     scanner.close();
     return 0;
