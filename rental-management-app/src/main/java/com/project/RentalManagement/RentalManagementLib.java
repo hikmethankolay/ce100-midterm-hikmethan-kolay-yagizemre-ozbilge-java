@@ -10,7 +10,7 @@
 @package com.project.RentalManagementLib
 @brief The com.project.RentalManagementLib package contains all the classes and files related to the com.project.RentalManagement App.
 */
-package com.project.RentalManagementLib;
+package com.project.RentalManagement;
 import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -99,6 +99,16 @@ public class RentalManagementLib {
 
     /** Tenant's surname. */
     static String surname;
+
+    /** Constructor */
+    public TenantInfo(int tenantID, int propertyID, int rent, String birthDate, String name, String surname) {
+      TenantInfo.tenantID = tenantID;
+      TenantInfo.propertyID = propertyID;
+      TenantInfo.rent = rent;
+      TenantInfo.birthDate = birthDate;
+      TenantInfo.name = name;
+      TenantInfo.surname = surname;
+    }
   }
   /**
    * @brief Represents property information including ID, age, bedroom count, living room count, floor count, size, and address.
@@ -127,6 +137,18 @@ public class RentalManagementLib {
 
     /** Address of the property. */
     static String address;
+
+    /** Constructor */
+    public PropertyInfo(int propertyID, int propertyAge, int bedrooms, int livingRooms, int floors, int size, String address) {
+      PropertyInfo.propertyID = propertyID;
+      PropertyInfo.propertyAge = propertyAge;
+      PropertyInfo.bedrooms = bedrooms;
+      PropertyInfo.livingrooms = livingRooms;
+      PropertyInfo.floors = floors;
+      PropertyInfo.size = size;
+      PropertyInfo.address = address;
+    }
+
   }
   /**
    * @brief Represents rent information including record number, tenant ID, current rent debt, and due date.
@@ -143,6 +165,13 @@ public class RentalManagementLib {
 
     /** Rent's due date. */
     static String dueDate;
+
+    /** Constructor */
+    public RentInfo(int tenantID, int currentRentDebt, String dueDate) {
+      RentInfo.tenantID = tenantID;
+      RentInfo.currentRentDebt = currentRentDebt;
+      RentInfo.dueDate = dueDate;
+    }
   }
 
   /**
@@ -166,6 +195,15 @@ public class RentalManagementLib {
 
     /** Expected finishing date of the maintenance. */
     static String expectedFinishingDate;
+
+    /** Constructor */
+    public MaintenanceInfo(int propertyID, int cost, int priority, String maintenanceType, String expectedFinishingDate) {
+      MaintenanceInfo.propertyID = propertyID;
+      MaintenanceInfo.cost = cost;
+      MaintenanceInfo.priority = priority;
+      MaintenanceInfo.maintenanceType = maintenanceType;
+      MaintenanceInfo.expectedFinishingDate = expectedFinishingDate;
+    }
   }
   /**
    * @brief Opens a binary file, deletes all of its content, and writes given text to it.
@@ -508,7 +546,35 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int add_property_record() {
-    return 0;
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("\nPlease enter PropertyID:");
+    int propertyID = scanner.nextInt();
+    System.out.print("\nPlease enter PropertyAge:");
+    int propertyAge = scanner.nextInt();
+    System.out.print("\nPlease enter Bedrooms:");
+    int bedrooms = scanner.nextInt();
+    System.out.print("\nPlease enter LivingRooms:");
+    int livingRooms = scanner.nextInt();
+    System.out.print("\nPlease enter Floors:");
+    int floors = scanner.nextInt();
+    System.out.print("\nPlease enter Size:");
+    int size = scanner.nextInt();
+    scanner.nextLine(); // Consume newline left-over
+    System.out.println("\nPlease enter Address:");
+    String address = scanner.nextLine();
+    String formattedRecord = String.format("PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%dm2 / Address:%s",
+                                           propertyID, propertyAge, bedrooms, livingRooms, floors, size, address);
+    File file = new File("property_records.bin");
+
+    if (!file.exists()) {
+      file_write("property_records.bin",formattedRecord);
+      scanner.close();
+      return 0;
+    } else {
+      file_append("property_records.bin",formattedRecord);
+      scanner.close();
+      return 0;
+    }
   }
   /**
    * @brief edit property record.
@@ -516,7 +582,34 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int edit_property_record() {
-    return 0;
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("\nPlease enter record number to edit:");
+    int RecordNumberToEdit = scanner.nextInt();
+    System.out.print("\nPlease enter PropertyID:");
+    int propertyID = scanner.nextInt();
+    System.out.print("\nPlease enter PropertyAge:");
+    int propertyAge = scanner.nextInt();
+    System.out.print("\nPlease enter Bedrooms:");
+    int bedrooms = scanner.nextInt();
+    System.out.print("\nPlease enter LivingRooms:");
+    int livingRooms = scanner.nextInt();
+    System.out.print("\nPlease enter Floors:");
+    int floors = scanner.nextInt();
+    System.out.print("\nPlease enter Size:");
+    int size = scanner.nextInt();
+    scanner.nextLine(); // Consume newline left-over
+    System.out.print("\nPlease enter Address:");
+    String address = scanner.nextLine();
+    String formattedRecord = String.format("PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%dm2 / Address:%s",
+                                           propertyID, propertyAge, bedrooms, livingRooms, floors, size, address);
+
+    if (file_edit("property_records.bin", RecordNumberToEdit, formattedRecord) == 0) {
+      scanner.close();
+      return 0;
+    } else {
+      scanner.close();
+      return -1;
+    }
   }
   /**
    * @brief delete property record.
@@ -524,7 +617,17 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int delete_property_record() {
-    return 0;
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("\nPlease enter record number to delete:");
+    int RecordNumberToDelete = scanner.nextInt();
+
+    if (file_line_delete("property_records.bin", RecordNumberToDelete) == 0) {
+      scanner.close();
+      return 0;
+    } else {
+      scanner.close();
+      return -1;
+    }
   }
   /**
    * @brief sort property record.

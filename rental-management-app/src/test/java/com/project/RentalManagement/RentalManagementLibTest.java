@@ -15,7 +15,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
-import com.project.RentalManagementLib.RentalManagementLib;
+import com.project.RentalManagement.RentalManagementLib;
 
 /**
 

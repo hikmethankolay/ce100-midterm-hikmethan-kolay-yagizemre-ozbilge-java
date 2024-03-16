@@ -13,7 +13,7 @@ package com.project.RentalManagement;
 import java.io.IOException;
 import java.util.Scanner;
 import org.slf4j.LoggerFactory;
-import com.project.RentalManagementLib.RentalManagementLib;
+import com.project.RentalManagement.RentalManagementLib;
 import ch.qos.logback.classic.Logger;
 
 /**
