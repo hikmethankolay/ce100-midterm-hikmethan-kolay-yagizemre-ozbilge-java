@@ -840,8 +840,31 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int add_maintenance_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	    System.out.print("\nPlease enter PropertyID:");
+	    int propertyID = scanner.nextInt();
+	    System.out.print("\nPlease enter Cost:");
+	    int cost = scanner.nextInt();
+	    System.out.print("\nPlease enter Priority:");
+	    int priority = scanner.nextInt();
+	    System.out.print("\nPlease enter MaintenanceType:");
+	    String maintenancetype = scanner.nextLine();
+	    System.out.print("\nPlease enter ExpectedFinishingDate:");
+	    String expectedfinishingdate = scanner.nextLine();
+	    String formattedRecord = String.format("PropertyID:%d / Cost:%d / Priority:%d / MaintenanceType:%s / ExpectedFinishingDate:%s",
+	                                           propertyID, cost, priority, maintenancetype, expectedfinishingdate);
+	    File file = new File("maintenance_records.bin");
+
+	    if (!file.exists()) {
+	      file_write("maintenance_records.bin",formattedRecord);
+	      scanner.close();
+	      return 0;
+	    } else {
+	      file_append("maintenance_records.bin",formattedRecord);
+	      scanner.close();
+	      return 0;
+	    }
+	  }
   /**
    * @brief edit maintenance record.
    *
