@@ -335,7 +335,7 @@ public class RentalManagementLib {
    * @param record record string to parse.
    * @return TenantInfo.
    */
-  private TenantInfo parseTenantInfo(String record) {
+  private static TenantInfo parseTenantInfo(String record) {
     String[] parts = record.split(" / ");
     int recordNumber = Integer.parseInt(parts[0].split(":")[1].trim().replace("-)", ""));
     int tenantID = Integer.parseInt(parts[1].split(":")[1].trim());
@@ -352,7 +352,7 @@ public class RentalManagementLib {
    * @param record record string to parse.
    * @return RentInfo.
    */
-  private RentInfo parseRentInfo(String record) {
+  private static RentInfo parseRentInfo(String record) {
     String[] parts = record.split(" / ");
     int recordNumber = Integer.parseInt(parts[0].split(":")[1].trim());
     int tenantID = Integer.parseInt(parts[1].split(":")[1].trim());
@@ -366,7 +366,7 @@ public class RentalManagementLib {
    * @param record record string to parse.
    * @return MaintenanceInfo.
    */
-  private MaintenanceInfo parseMaintenanceInfo(String record) {
+  private static MaintenanceInfo parseMaintenanceInfo(String record) {
     String[] parts = record.split(" / ");
     int recordNumber = Integer.parseInt(parts[0].split(":")[1].trim().replace("-)", ""));
     int propertyID = Integer.parseInt(parts[1].split(":")[1].trim());
@@ -374,7 +374,7 @@ public class RentalManagementLib {
     int priority = Integer.parseInt(parts[3].split(":")[1].trim());
     String maintenanceType = parts[4].split(":")[1].trim();
     String expectedFinishingDate = parts[5].split(":")[1].trim();
-    return new MaintenanceInfo(recordNumber, propertyID, cost, priority, maintenanceType, expectedFinishingDate);
+    return new RentalManagementLib().new MaintenanceInfo(recordNumber, propertyID, cost, priority, maintenanceType, expectedFinishingDate);
   }
   /**
    * @brief A method to parse records.
@@ -929,6 +929,32 @@ public class RentalManagementLib {
    */
   public static int sort_tenant_record() {
     QuickSorter<TenantInfo> tenantSorter = new QuickSorter<>();
+    String input = file_read("tenant_records.bin",'Y');
+
+    if (input == null) {
+      return -1;
+    }
+
+    String[] lines = input.split("\n");
+    ArrayList<TenantInfo> tenants = new ArrayList<>();
+
+    for (String line : lines) {
+      TenantInfo tenant = parseTenantInfo(line);
+
+      if (tenants != null) {
+        tenants.add(tenant);
+      }
+    }
+
+    tenantSorter.quickSort(tenants, 0, tenants.size() - 1);
+    System.out.print("\n------------Tenat Records Sorted By TenantID------------");
+
+    for (TenantInfo tenant : tenants) {
+      System.out.printf("%d-)TenantID:%d / PropertyID:%d / Rent:%d / BirthDate:%s / Name:%s / Surname:%s\n",
+                        tenant.tenantID, tenant.propertyID, tenant.rent, tenant.birthDate,
+                        tenant.name, tenant.surname);
+    }
+
     return 0;
   }
   /**
@@ -938,6 +964,41 @@ public class RentalManagementLib {
    */
   public static int search_tenant_record() {
     QuickSorter<TenantInfo> tenantSorter = new QuickSorter<>();
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("\nPlease enter the ID of the Tenant you want to find:");
+    int TenantIDToFind = scanner.nextInt();
+    String input = file_read("tenant_records.bin",'Y');
+
+    if (input == null) {
+      scanner.close();
+      return -1;
+    }
+
+    String[] lines = input.split("\n");
+    ArrayList<TenantInfo> tenants = new ArrayList<>();
+
+    for (String line : lines) {
+      TenantInfo tenant = parseTenantInfo(line);
+
+      if (tenants != null) {
+        tenants.add(tenant);
+      }
+    }
+
+    tenantSorter.quickSort(tenants, 0, tenants.size() - 1);
+    int indexOfID = tenantSorter.recursiveBinarySearch(tenants, 0, tenants.size()-1, TenantIDToFind);
+
+    if (indexOfID != -1) {
+      TenantInfo foundTenant = tenants.get(indexOfID);
+      System.out.print("\n------------Property Record Found By PropertyID------------");
+      System.out.printf("%d-)PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%dm2 / Address:%s\n",
+                        foundTenant.tenantID, foundTenant.propertyID, foundTenant.rent, foundTenant.birthDate,
+                        foundTenant.name, foundTenant.surname);
+    } else {
+      System.out.print("Property ID not found.");
+    }
+
+    scanner.close();
     return 0;
   }
   /**
