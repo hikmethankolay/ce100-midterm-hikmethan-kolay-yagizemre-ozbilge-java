@@ -7,10 +7,10 @@
 5-)Search Rents
 6-)Sort Rents
 7-)Return to Main Menu
-Please enter a choice:
-Please enter  TenantID:
-Please enter  CurrentRentDebt:
-Please enter  DueDate:
+Please enter a choice: 
+Please enter TenantID:
+Please enter CurrentRentDebt:
+Please enter DueDate:
 --------Rent Tracking--------
 1-)Show Rents
 2-)Add Rents
@@ -19,10 +19,10 @@ Please enter  DueDate:
 5-)Search Rents
 6-)Sort Rents
 7-)Return to Main Menu
-Please enter a choice:
-Please enter  TenantID:
-Please enter  CurrentRentDebt:
-Please enter  DueDate:
+Please enter a choice: 
+Please enter TenantID:
+Please enter CurrentRentDebt:
+Please enter DueDate:
 --------Rent Tracking--------
 1-)Show Rents
 2-)Add Rents
@@ -31,10 +31,10 @@ Please enter  DueDate:
 5-)Search Rents
 6-)Sort Rents
 7-)Return to Main Menu
-Please enter a choice:
-Please enter  TenantID:
-Please enter  CurrentRentDebt:
-Please enter  DueDate:
+Please enter a choice: 
+Please enter TenantID:
+Please enter CurrentRentDebt:
+Please enter DueDate:
 --------Rent Tracking--------
 1-)Show Rents
 2-)Add Rents
@@ -43,10 +43,10 @@ Please enter  DueDate:
 5-)Search Rents
 6-)Sort Rents
 7-)Return to Main Menu
-Please enter a choice:
-Please enter  TenantID:
-Please enter  CurrentRentDebt:
-Please enter  DueDate:
+Please enter a choice: 
+Please enter TenantID:
+Please enter CurrentRentDebt:
+Please enter DueDate:
 --------Rent Tracking--------
 1-)Show Rents
 2-)Add Rents
@@ -55,10 +55,10 @@ Please enter  DueDate:
 5-)Search Rents
 6-)Sort Rents
 7-)Return to Main Menu
-Please enter a choice:
-Please enter  TenantID:
-Please enter  CurrentRentDebt:
-Please enter  DueDate:
+Please enter a choice: 
+Please enter TenantID:
+Please enter CurrentRentDebt:
+Please enter DueDate:
 --------Rent Tracking--------
 1-)Show Rents
 2-)Add Rents
@@ -67,7 +67,7 @@ Please enter  DueDate:
 5-)Search Rents
 6-)Sort Rents
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 --------------Rent Records--------------
 1-)TenantID:123 / CurrentRentDebt:56756 / DueDate:55/55/5555
 2-)TenantID:345 / CurrentRentDebt:56756 / DueDate:55/55/5555
@@ -83,11 +83,11 @@ Please enter a choice:
 5-)Search Rents
 6-)Sort Rents
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter record number to edit:
-Please enter  TenantID:
-Please enter  CurrentRentDebt:
-Please enter  DueDate:
+Please enter TenantID:
+Please enter CurrentRentDebt:
+Please enter DueDate:
 Data successfully edited.
 --------Rent Tracking--------
 1-)Show Rents
@@ -97,14 +97,13 @@ Data successfully edited.
 5-)Search Rents
 6-)Sort Rents
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 ------------Rent Records Sorted By TenantID------------
 4-)TenantID:56 / CurrentRentDebt:56756 / DueDate:55/55/5555
 1-)TenantID:123 / CurrentRentDebt:56756 / DueDate:55/55/5555
 2-)TenantID:345 / CurrentRentDebt:56756 / DueDate:55/55/5555
 3-)TenantID:678 / CurrentRentDebt:56756 / DueDate:55/55/5555
 5-)TenantID:836 / CurrentRentDebt:56756 / DueDate:55/55/5555
-
 --------Rent Tracking--------
 1-)Show Rents
 2-)Add Rents
@@ -113,10 +112,10 @@ Please enter a choice:
 5-)Search Rents
 6-)Sort Rents
 7-)Return to Main Menu
-Please enter a choice:Please enter the ID of the Tenant you want to find:
+Please enter a choice: 
+Please enter the ID of the Tenant you want to find:
 ------------Rent Record Founded By TenantID------------
 5-)TenantID:836 / CurrentRentDebt:56756 / DueDate:55/55/5555
-
 --------Rent Tracking--------
 1-)Show Rents
 2-)Add Rents
@@ -125,7 +124,7 @@ Please enter a choice:Please enter the ID of the Tenant you want to find:
 5-)Search Rents
 6-)Sort Rents
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter record number to delete:
 Data successfully deleted
 --------Rent Tracking--------
@@ -136,7 +135,7 @@ Data successfully deleted
 5-)Search Rents
 6-)Sort Rents
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please input a correct choice.
 --------Rent Tracking--------
 1-)Show Rents
@@ -146,4 +145,4 @@ Please input a correct choice.
 5-)Search Rents
 6-)Sort Rents
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 

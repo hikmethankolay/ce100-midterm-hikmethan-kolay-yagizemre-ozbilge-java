@@ -254,4 +254,26 @@ public class RentalManagementAppTest {
     assertEquals(expectedOutput, actualOutput);
   }
 
+  /**
+   * @brief Tests for rents main menu.
+   *
+   */
+  @Test
+  public void test_08MainMenu() throws IOException {
+    RentalManagementLib lib = new RentalManagementLib();
+    // Redirect System.in and System.out from/to test files
+    redirectSystemIO("main_menu_input_test.txt", "main_menu_output_test.txt");
+    Scanner scanner = new Scanner(System.in);
+    // Call the method under test
+    lib.mainMenu(scanner);
+
+    // Reset System.in and System.out to their original sources
+    resetSystemIO();
+
+    // Read the output from the file and compare
+    String actualOutput = RentalManagementLib.file_read("main_menu_output_test.txt",'Y');
+    String expectedOutput = RentalManagementLib.file_read("main_menu_expected_output.bin",'Y');
+    assertEquals(expectedOutput, actualOutput);
+  }
+
 }

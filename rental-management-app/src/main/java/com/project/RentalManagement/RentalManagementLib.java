@@ -1191,7 +1191,7 @@ public class RentalManagementLib {
 
     if (indexOfID != -1) {
       RentInfo foundRent = rents.get(indexOfID);
-      System.out.print("\n------------Property Record Found By PropertyID------------");
+      System.out.print("\n------------Rent Record Founded By TenantID------------");
       System.out.printf("\n%d-)TenantID:%d / CurrentRentDebt:%d / DueDate:%s",
                         foundRent.recordNumber,foundRent.tenantID, foundRent.currentRentDebt, foundRent.dueDate);
     } else {
@@ -1377,7 +1377,7 @@ public class RentalManagementLib {
   */
   public static int search_maintenance_record(Scanner scanner) {
     QuickSorter<MaintenanceInfo> binarySearcher = new QuickSorter<>();
-    System.out.print("\nPlease enter the Priority of the Property you want to find::");
+    System.out.print("\nPlease enter the Priority of the Property you want to find:");
     int priorityToFind = scanner.nextInt();
     String input = file_read("maintenance_records.bin",'Y');
 

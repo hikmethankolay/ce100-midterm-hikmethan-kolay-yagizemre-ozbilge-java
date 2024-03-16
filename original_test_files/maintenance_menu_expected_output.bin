@@ -7,7 +7,7 @@
 5-)Search Maintenances
 6-)Sort Maintenances
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter PropertyID:
 Please enter Cost:
 Please enter Priority:
@@ -21,7 +21,7 @@ Please enter ExpectedFinishingDate:
 5-)Search Maintenances
 6-)Sort Maintenances
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter PropertyID:
 Please enter Cost:
 Please enter Priority:
@@ -35,7 +35,7 @@ Please enter ExpectedFinishingDate:
 5-)Search Maintenances
 6-)Sort Maintenances
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter PropertyID:
 Please enter Cost:
 Please enter Priority:
@@ -49,7 +49,7 @@ Please enter ExpectedFinishingDate:
 5-)Search Maintenances
 6-)Sort Maintenances
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter PropertyID:
 Please enter Cost:
 Please enter Priority:
@@ -63,7 +63,7 @@ Please enter ExpectedFinishingDate:
 5-)Search Maintenances
 6-)Sort Maintenances
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 --------------Maintenance Records--------------
 1-)PropertyID:766 / Cost:456 / Priority:100 / MaintenanceType:asdasd / ExpectedFinishingDate:12/12/1233
 2-)PropertyID:123 / Cost:456 / Priority:150 / MaintenanceType:asdasd / ExpectedFinishingDate:12/12/1233
@@ -78,7 +78,7 @@ Please enter a choice:
 5-)Search Maintenances
 6-)Sort Maintenances
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter record number to edit:
 Please enter PropertyID:
 Please enter Cost:
@@ -94,11 +94,10 @@ Data successfully edited.
 5-)Search Maintenances
 6-)Sort Maintenances
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter the Priority of the Property you want to find:
 ------------Maintenance Record Founded By Priority------------
 2-)PropertyID:123 / Cost:456 / Priority:150 / MaintenanceType:asdasd / ExpectedFinishingDate:12/12/1233
-
 --------Maintenance Tracking--------
 1-)Show Maintenances
 2-)Add Maintenances
@@ -107,12 +106,12 @@ Please enter the Priority of the Property you want to find:
 5-)Search Maintenances
 6-)Sort Maintenances
 7-)Return to Main Menu
-Please enter a choice:
-------------Maintenances Records Sorted By Priority------------1-)PropertyID:766 / Cost:456 / Priority:100 / MaintenanceType:asdasd / ExpectedFinishingDate:12/12/1233
+Please enter a choice: 
+------------Maintenances Records Sorted By Priority------------
+1-)PropertyID:766 / Cost:456 / Priority:100 / MaintenanceType:asdasd / ExpectedFinishingDate:12/12/1233
 3-)PropertyID:856 / Cost:456 / Priority:120 / MaintenanceType:asdasd / ExpectedFinishingDate:12/12/1233
 2-)PropertyID:123 / Cost:456 / Priority:150 / MaintenanceType:asdasd / ExpectedFinishingDate:12/12/1233
 4-)PropertyID:546 / Cost:456 / Priority:200 / MaintenanceType:asdasd / ExpectedFinishingDate:12/12/1233
-
 --------Maintenance Tracking--------
 1-)Show Maintenances
 2-)Add Maintenances
@@ -121,7 +120,7 @@ Please enter a choice:
 5-)Search Maintenances
 6-)Sort Maintenances
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter record number to delete:
 Data successfully deleted
 --------Maintenance Tracking--------
@@ -132,7 +131,7 @@ Data successfully deleted
 5-)Search Maintenances
 6-)Sort Maintenances
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please input a correct choice.
 --------Maintenance Tracking--------
 1-)Show Maintenances
@@ -142,4 +141,4 @@ Please input a correct choice.
 5-)Search Maintenances
 6-)Sort Maintenances
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
