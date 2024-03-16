@@ -336,14 +336,15 @@ public class RentalManagementLib {
    * @return TenantInfo.
    */
   private static TenantInfo parseTenantInfo(String record) {
-    String[] parts = record.split(" / ");
-    int recordNumber = Integer.parseInt(parts[0].split(":")[1].trim().replace("-)", ""));
-    int tenantID = Integer.parseInt(parts[1].split(":")[1].trim());
-    int propertyID = Integer.parseInt(parts[2].split(":")[1].trim());
-    int rent = Integer.parseInt(parts[3].split(":")[1].trim());
-    String birthDate = parts[4].split(":")[1].trim();
-    String name = parts[5].split(":")[1].trim();
-    String surname = parts[6].split(":")[1].trim();
+    String[] parts = record.split("-", 2);
+    int recordNumber = Integer.parseInt(parts[0].trim());
+    String[] details = parts[1].split(" / ");
+    int tenantID = Integer.parseInt(details[0].split(":")[1].trim());
+    int propertyID = Integer.parseInt(details[1].split(":")[1].trim());
+    int rent = Integer.parseInt(details[2].split(":")[1].trim());
+    String birthDate = details[3].split(":")[1].trim();
+    String name = details[4].split(":")[1].trim();
+    String surname = details[5].split(":")[1].trim();
     return new RentalManagementLib().new TenantInfo(recordNumber, tenantID, propertyID, rent, birthDate, name, surname);
   }
   /**
@@ -353,11 +354,12 @@ public class RentalManagementLib {
    * @return RentInfo.
    */
   private static RentInfo parseRentInfo(String record) {
-    String[] parts = record.split(" / ");
-    int recordNumber = Integer.parseInt(parts[0].split(":")[1].trim());
-    int tenantID = Integer.parseInt(parts[1].split(":")[1].trim());
-    int currentRentDebt = Integer.parseInt(parts[2].split(":")[1].trim());
-    String dueDate = parts[3].split(":")[1].trim();
+    String[] parts = record.split("-", 2);
+    int recordNumber = Integer.parseInt(parts[0].trim());
+    String[] details = parts[1].split(" / ");
+    int tenantID = Integer.parseInt(details[0].split(":")[1].trim());
+    int currentRentDebt = Integer.parseInt(details[1].split(":")[1].trim());
+    String dueDate = details[2].split(":")[1].trim();
     return new RentalManagementLib().new RentInfo(recordNumber, tenantID, currentRentDebt, dueDate);
   }
   /**
@@ -367,13 +369,14 @@ public class RentalManagementLib {
    * @return MaintenanceInfo.
    */
   private static MaintenanceInfo parseMaintenanceInfo(String record) {
-    String[] parts = record.split(" / ");
-    int recordNumber = Integer.parseInt(parts[0].split(":")[1].trim().replace("-)", ""));
-    int propertyID = Integer.parseInt(parts[1].split(":")[1].trim());
-    int cost = Integer.parseInt(parts[2].split(":")[1].trim());
-    int priority = Integer.parseInt(parts[3].split(":")[1].trim());
-    String maintenanceType = parts[4].split(":")[1].trim();
-    String expectedFinishingDate = parts[5].split(":")[1].trim();
+    String[] parts = record.split("-", 2);
+    int recordNumber = Integer.parseInt(parts[0].trim());
+    String[] details = parts[1].split(" / ");
+    int propertyID = Integer.parseInt(details[0].split(":")[1].trim());
+    int cost = Integer.parseInt(details[1].split(":")[1].trim());
+    int priority = Integer.parseInt(details[2].split(":")[1].trim());
+    String maintenanceType = details[3].split(":")[1].trim();
+    String expectedFinishingDate = details[4].split(":")[1].trim();
     return new RentalManagementLib().new MaintenanceInfo(recordNumber, propertyID, cost, priority, maintenanceType, expectedFinishingDate);
   }
   /**
@@ -383,15 +386,16 @@ public class RentalManagementLib {
    * @return PropertyInfo.
    */
   private static PropertyInfo parsePropertyInfo(String record) {
-    String[] parts = record.split(" / ");
-    int recordNumber = Integer.parseInt(parts[0].split(":")[1].trim().replace("-)", ""));
-    int propertyID = Integer.parseInt(parts[1].split(":")[1].trim());
-    int propertyAge = Integer.parseInt(parts[2].split(":")[1].trim());
-    int bedrooms = Integer.parseInt(parts[3].split(":")[1].trim());
-    int livingrooms = Integer.parseInt(parts[4].split(":")[1].trim());
-    int floors = Integer.parseInt(parts[5].split(":")[1].trim());
-    int size = Integer.parseInt(parts[6].split("m2")[0].split(":")[1].trim());
-    String address = parts[7].split(":")[1].trim();
+    String[] parts = record.split("-", 2);
+    int recordNumber = Integer.parseInt(parts[0].trim());
+    String[] details = parts[1].split(" / ");
+    int propertyID = Integer.parseInt(details[0].split(":")[1].trim());
+    int propertyAge = Integer.parseInt(details[1].split(":")[1].trim());
+    int bedrooms = Integer.parseInt(details[2].split(":")[1].trim());
+    int livingrooms = Integer.parseInt(details[3].split(":")[1].trim());
+    int floors = Integer.parseInt(details[4].split(":")[1].trim());
+    int size = Integer.parseInt(details[5].split(":")[1].trim());
+    String address = details[6].split(":")[1].trim();
     return new RentalManagementLib().new PropertyInfo(recordNumber, propertyID, propertyAge, bedrooms, livingrooms, floors, size, address);
   }
   /**
@@ -734,34 +738,36 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int add_property_record() {
-    Scanner scanner = new Scanner(System.in);
+  public static int add_property_record(Scanner scanner) {
     System.out.print("\nPlease enter PropertyID:");
     int propertyID = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter PropertyAge:");
     int propertyAge = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter Bedrooms:");
     int bedrooms = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter LivingRooms:");
     int livingRooms = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter Floors:");
     int floors = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter Size:");
     int size = scanner.nextInt();
     scanner.nextLine(); // Consume newline left-over
     System.out.print("\nPlease enter Address:");
     String address = scanner.nextLine();
-    String formattedRecord = String.format("PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%dm2 / Address:%s",
+    String formattedRecord = String.format("PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%d / Address:%s",
                                            propertyID, propertyAge, bedrooms, livingRooms, floors, size, address);
     File file = new File("property_records.bin");
 
     if (!file.exists()) {
       file_write("property_records.bin",formattedRecord);
-      scanner.close();
       return 0;
     } else {
       file_append("property_records.bin",formattedRecord);
-      scanner.close();
       return 0;
     }
   }
@@ -770,33 +776,36 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int edit_property_record() {
-    Scanner scanner = new Scanner(System.in);
+  public static int edit_property_record(Scanner scanner) {
     System.out.print("\nPlease enter record number to edit:");
     int RecordNumberToEdit = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter PropertyID:");
     int propertyID = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter PropertyAge:");
     int propertyAge = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter Bedrooms:");
     int bedrooms = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter LivingRooms:");
     int livingRooms = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter Floors:");
     int floors = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter Size:");
     int size = scanner.nextInt();
     scanner.nextLine(); // Consume newline left-over
     System.out.print("\nPlease enter Address:");
     String address = scanner.nextLine();
-    String formattedRecord = String.format("PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%dm2 / Address:%s",
+    String formattedRecord = String.format("PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%d / Address:%s",
                                            propertyID, propertyAge, bedrooms, livingRooms, floors, size, address);
 
     if (file_edit("property_records.bin", RecordNumberToEdit, formattedRecord) == 0) {
-      scanner.close();
       return 0;
     } else {
-      scanner.close();
       return -1;
     }
   }
@@ -805,16 +814,13 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int delete_property_record() {
-    Scanner scanner = new Scanner(System.in);
+  public static int delete_property_record(Scanner scanner) {
     System.out.print("\nPlease enter record number to delete:");
     int RecordNumberToDelete = scanner.nextInt();
 
     if (file_line_delete("property_records.bin", RecordNumberToDelete) == 0) {
-      scanner.close();
       return 0;
     } else {
-      scanner.close();
       return -1;
     }
   }
@@ -846,7 +852,7 @@ public class RentalManagementLib {
     System.out.print("\n------------Property Records Sorted By PropertyID------------");
 
     for (PropertyInfo property : properties) {
-      System.out.printf("%d-)PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%dm2 / Address:%s\n",
+      System.out.printf("\n%d-)PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%d / Address:%s",
                         property.recordNumber, property.propertyID, property.propertyAge, property.bedrooms,
                         property.livingrooms, property.floors, property.size, property.address);
     }
@@ -858,15 +864,13 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int search_property_record() {
+  public static int search_property_record(Scanner scanner) {
     QuickSorter<PropertyInfo> propertySorter = new QuickSorter<>();
-    Scanner scanner = new Scanner(System.in);
     System.out.print("\nPlease enter the ID of the Property you want to find:");
     int propertyIDToFind = scanner.nextInt();
     String input = file_read("property_records.bin",'Y');
 
     if (input == null) {
-      scanner.close();
       return -1;
     }
 
@@ -887,14 +891,13 @@ public class RentalManagementLib {
     if (indexOfID != -1) {
       PropertyInfo foundProperty = properties.get(indexOfID);
       System.out.print("\n------------Property Record Found By PropertyID------------");
-      System.out.printf("%d-)PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%dm2 / Address:%s\n",
+      System.out.printf("\n%d-)PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%d / Address:%s",
                         foundProperty.recordNumber, foundProperty.propertyID, foundProperty.propertyAge, foundProperty.bedrooms,
                         foundProperty.livingrooms, foundProperty.floors, foundProperty.size, foundProperty.address);
     } else {
-      System.out.print("Property ID not found.");
+      System.out.print("\nProperty ID not found.");
     }
 
-    scanner.close();
     return 0;
   }
 
@@ -903,32 +906,31 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int add_tenant_record() {
-    Scanner scanner = new Scanner(System.in);
+  public static int add_tenant_record(Scanner scanner) {
     System.out.print("\nPlease enter TenantID:");
     int tenantID = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter PropertyID:");
     int propertyID = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter Rent:");
     int rent = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter BirthDate:");
     String birthdate = scanner.nextLine();
     System.out.print("\nPlease enter Name:");
     String name = scanner.nextLine();
     System.out.print("\nPlease enter Surname:");
     String surname = scanner.nextLine();
-    scanner.nextLine(); // Consume newline left-over
     String formattedRecord = String.format("TenantID:%d / PropertyID:%d / Rent:%d / Birthdate:%s / Name:%s / Surname:%s",
                                            tenantID,propertyID, rent, birthdate, name, surname);
     File file = new File("tenant_records.bin");
 
     if (!file.exists()) {
       file_write("tenant_records.bin",formattedRecord);
-      scanner.close();
       return 0;
     } else {
       file_append("tenant_records.bin",formattedRecord);
-      scanner.close();
       return 0;
     }
   }
@@ -937,31 +939,31 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int edit_tenant_record() {
-    Scanner scanner = new Scanner(System.in);
+  public static int edit_tenant_record(Scanner scanner) {
     System.out.print("\nPlease enter record number to edit:");
     int RecordNumberToEdit = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter TenantID:");
     int tenantID = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter PropertyID:");
     int propertyID = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter Rent:");
     int rent = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter BirthDate:");
     String birthdate = scanner.nextLine();
     System.out.print("\nPlease enter Name:");
     String name = scanner.nextLine();
     System.out.print("\nPlease enter Surname:");
     String surname = scanner.nextLine();
-    scanner.nextLine(); // Consume newline left-over
     String formattedRecord = String.format("TenantID:%d / PropertyID:%d / Rent:%d / Birthdate:%s / Name:%s / Surname:%s",
                                            tenantID,propertyID, rent, birthdate, name, surname);
 
     if (file_edit("tenant_records.bin", RecordNumberToEdit, formattedRecord) == 0) {
-      scanner.close();
       return 0;
     } else {
-      scanner.close();
       return -1;
     }
   }
@@ -970,16 +972,13 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int delete_tenant_record() {
-    Scanner scanner = new Scanner(System.in);
+  public static int delete_tenant_record(Scanner scanner) {
     System.out.print("\nPlease enter record number to delete:");
     int RecordNumberToDelete = scanner.nextInt();
 
     if (file_line_delete("tenant_records.bin", RecordNumberToDelete) == 0) {
-      scanner.close();
       return 0;
     } else {
-      scanner.close();
       return -1;
     }
   }
@@ -1013,7 +1012,7 @@ public class RentalManagementLib {
     System.out.print("\n------------Tenat Records Sorted By TenantID------------");
 
     for (TenantInfo tenant : tenants) {
-      System.out.printf("%d-)TenantID:%d / PropertyID:%d / Rent:%d / BirthDate:%s / Name:%s / Surname:%s\n",
+      System.out.printf("\n%d-)TenantID:%d / PropertyID:%d / Rent:%d / BirthDate:%s / Name:%s / Surname:%s",
                         tenant.recordNumber,tenant.tenantID, tenant.propertyID, tenant.rent, tenant.birthDate,
                         tenant.name, tenant.surname);
     }
@@ -1025,15 +1024,13 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int search_tenant_record() {
+  public static int search_tenant_record(Scanner scanner) {
     QuickSorter<TenantInfo> tenantSorter = new QuickSorter<>();
-    Scanner scanner = new Scanner(System.in);
     System.out.print("\nPlease enter the ID of the Tenant you want to find:");
     int TenantIDToFind = scanner.nextInt();
     String input = file_read("tenant_records.bin",'Y');
 
     if (input == null) {
-      scanner.close();
       return -1;
     }
 
@@ -1054,14 +1051,13 @@ public class RentalManagementLib {
     if (indexOfID != -1) {
       TenantInfo foundTenant = tenants.get(indexOfID);
       System.out.print("\n------------Property Record Found By PropertyID------------");
-      System.out.printf("%d-)PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%dm2 / Address:%s\n",
+      System.out.printf("\n%d-)PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%d / Address:%s",
                         foundTenant.recordNumber,foundTenant.tenantID, foundTenant.propertyID, foundTenant.rent, foundTenant.birthDate,
                         foundTenant.name, foundTenant.surname);
     } else {
-      System.out.print("Property ID not found.");
+      System.out.print("\nTenant ID not found.");
     }
 
-    scanner.close();
     return 0;
   }
   /**
@@ -1069,25 +1065,23 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int add_rent_record() {
-    Scanner scanner = new Scanner(System.in);
+  public static int add_rent_record(Scanner scanner) {
     System.out.print("\nPlease enter TenantID:");
     int tenantID = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter CurrentRentDebt:");
     int currentrentdebt = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter DueDate:");
     String duedate = scanner.nextLine();
-    scanner.nextLine(); // Consume newline left-over
     String formattedRecord = String.format("TenantID:%d / CurrentRentDebt:%d / DueDate:%s",tenantID,currentrentdebt,duedate);
     File file = new File("rent_records.bin");
 
     if (!file.exists()) {
       file_write("rent_records.bin",formattedRecord);
-      scanner.close();
       return 0;
     } else {
       file_append("rent_records.bin",formattedRecord);
-      scanner.close();
       return 0;
     }
   }
@@ -1096,24 +1090,24 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int edit_rent_record() {
-    Scanner scanner = new Scanner(System.in);
+  public static int edit_rent_record(Scanner scanner) {
     System.out.print("\nPlease enter record number to edit:");
     int RecordNumberToEdit = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter TenantID:");
     int tenantID = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter CurrentRentDebt:");
     int currentrentdebt = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter DueDate:");
     String duedate = scanner.nextLine();
     scanner.nextLine(); // Consume newline left-over
     String formattedRecord = String.format("TenantID:%d / CurrentRentDebt:%d / DueDate:%s",tenantID,currentrentdebt,duedate);
 
     if (file_edit("rent_records.bin", RecordNumberToEdit, formattedRecord) == 0) {
-      scanner.close();
       return 0;
     } else {
-      scanner.close();
       return -1;
     }
   }
@@ -1122,16 +1116,13 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int delete_rent_record() {
-    Scanner scanner = new Scanner(System.in);
+  public static int delete_rent_record(Scanner scanner) {
     System.out.print("\nPlease enter record number to delete:");
     int RecordNumberToDelete = scanner.nextInt();
 
     if (file_line_delete("rent_records.bin", RecordNumberToDelete) == 0) {
-      scanner.close();
       return 0;
     } else {
-      scanner.close();
       return -1;
     }
   }
@@ -1163,7 +1154,7 @@ public class RentalManagementLib {
     System.out.print("\n------------Rent Records Sorted By TenantID------------");
 
     for (RentInfo rent : rents) {
-      System.out.printf("%d-)TenantID:%d / CurrentRentDebt:%d / DueDate:%s\n",
+      System.out.printf("\n%d-)TenantID:%d / CurrentRentDebt:%d / DueDate:%s",
                         rent.recordNumber,rent.tenantID, rent.currentRentDebt, rent.dueDate);
     }
 
@@ -1174,15 +1165,13 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int search_rent_record() {
+  public static int search_rent_record(Scanner scanner) {
     QuickSorter<RentInfo> rentSorter = new QuickSorter<>();
-    Scanner scanner = new Scanner(System.in);
     System.out.print("\nPlease enter the ID of the Tenant you want to find:");
     int TenantIDToFind = scanner.nextInt();
     String input = file_read("rent_records.bin",'Y');
 
     if (input == null) {
-      scanner.close();
       return -1;
     }
 
@@ -1203,13 +1192,12 @@ public class RentalManagementLib {
     if (indexOfID != -1) {
       RentInfo foundRent = rents.get(indexOfID);
       System.out.print("\n------------Property Record Found By PropertyID------------");
-      System.out.printf("%d-)TenantID:%d / CurrentRentDebt:%d / DueDate:%s\n",
+      System.out.printf("\n%d-)TenantID:%d / CurrentRentDebt:%d / DueDate:%s",
                         foundRent.recordNumber,foundRent.tenantID, foundRent.currentRentDebt, foundRent.dueDate);
     } else {
-      System.out.print("Property ID not found.");
+      System.out.print("\nTenant ID not found.");
     }
 
-    scanner.close();
     return 0;
   }
   /**
@@ -1217,14 +1205,16 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int add_maintenance_record() {
-    Scanner scanner = new Scanner(System.in);
+  public static int add_maintenance_record(Scanner scanner) {
     System.out.print("\nPlease enter PropertyID:");
     int propertyID = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter Cost:");
     int cost = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter Priority:");
     int priority = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter MaintenanceType:");
     String maintenancetype = scanner.nextLine();
     System.out.print("\nPlease enter ExpectedFinishingDate:");
@@ -1235,11 +1225,9 @@ public class RentalManagementLib {
 
     if (!file.exists()) {
       file_write("maintenance_records.bin",formattedRecord);
-      scanner.close();
       return 0;
     } else {
       file_append("maintenance_records.bin",formattedRecord);
-      scanner.close();
       return 0;
     }
   }
@@ -1248,16 +1236,19 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int edit_maintenance_record() {
-    Scanner scanner = new Scanner(System.in);
+  public static int edit_maintenance_record(Scanner scanner) {
     System.out.print("\nPlease enter record number to edit:");
     int RecordNumberToEdit = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter PropertyID:");
     int propertyID = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter Cost:");
     int cost = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter Priority:");
     int priority = scanner.nextInt();
+    scanner.nextLine();
     System.out.print("\nPlease enter MaintenanceType:");
     String maintenancetype = scanner.nextLine();
     System.out.print("\nPlease enter ExpectedFinishingDate:");
@@ -1266,10 +1257,8 @@ public class RentalManagementLib {
                                            propertyID, cost, priority, maintenancetype, expectedfinishingdate);
 
     if (file_edit("maintenance_records.bin", RecordNumberToEdit, formattedRecord) == 0) {
-      scanner.close();
       return 0;
     } else {
-      scanner.close();
       return -1;
     }
   }
@@ -1278,16 +1267,13 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public static int delete_maintenance_record() {
-    Scanner scanner = new Scanner(System.in);
+  public static int delete_maintenance_record(Scanner scanner) {
     System.out.print("\nPlease enter record number to delete:");
     int RecordNumberToDelete = scanner.nextInt();
 
     if (file_line_delete("maintenance_records.bin", RecordNumberToDelete) == 0) {
-      scanner.close();
       return 0;
     } else {
-      scanner.close();
       return -1;
     }
   }
@@ -1378,7 +1364,7 @@ public class RentalManagementLib {
     System.out.print("\n------------Maintenances Records Sorted By Priority------------");
 
     for (MaintenanceInfo maintenance : maintenances) {
-      System.out.printf("%d-)PropertyID:%d / Cost:%d / Priority:%d / MaintenanceType:%s / ExpectedFinishingDate:%s\n",
+      System.out.printf("\n%d-)PropertyID:%d / Cost:%d / Priority:%d / MaintenanceType:%s / ExpectedFinishingDate:%s",
                         maintenance.recordNumber,maintenance.propertyID, maintenance.cost, maintenance.priority, maintenance.maintenanceType,maintenance.expectedFinishingDate );
     }
 
@@ -1389,15 +1375,13 @@ public class RentalManagementLib {
   *
   * @return 0.
   */
-  public static int search_maintenance_record() {
+  public static int search_maintenance_record(Scanner scanner) {
     QuickSorter<MaintenanceInfo> binarySearcher = new QuickSorter<>();
-    Scanner scanner = new Scanner(System.in);
     System.out.print("\nPlease enter the Priority of the Property you want to find::");
     int priorityToFind = scanner.nextInt();
     String input = file_read("maintenance_records.bin",'Y');
 
     if (input == null) {
-      scanner.close();
       return -1;
     }
 
@@ -1418,13 +1402,12 @@ public class RentalManagementLib {
     if (indexOfID != -1) {
       MaintenanceInfo foundMaintenance = maintenances.get(indexOfID);
       System.out.print("\n------------Maintenance Record Founded By Priority------------");
-      System.out.printf("%d-)%d-)PropertyID:%d / Cost:%d / Priority:%d / MaintenanceType:%s / ExpectedFinishingDate:%s\n",
+      System.out.printf("\n%d-)PropertyID:%d / Cost:%d / Priority:%d / MaintenanceType:%s / ExpectedFinishingDate:%s",
                         foundMaintenance.recordNumber,foundMaintenance.propertyID, foundMaintenance.cost, foundMaintenance.priority, foundMaintenance.maintenanceType,foundMaintenance.expectedFinishingDate);
     } else {
-      System.out.print("Property ID not found.");
+      System.out.print("\nPriority not found.");
     }
 
-    scanner.close();
     return 0;
   }
   /**
@@ -1432,9 +1415,7 @@ public class RentalManagementLib {
    *
    * @return 0.
    */
-  public int propertiesMenu() {
-    Scanner scanner = new Scanner(System.in);
-
+  public int propertiesMenu(Scanner scanner) {
     while (true) {
       System.out.print("\n--------Properties--------");
       System.out.print("\n1-)Show Properties");
@@ -1451,13 +1432,13 @@ public class RentalManagementLib {
         System.out.print("\n--------------Property Records--------------\n");
         file_read("property_records.bin",'N');
       } else if (choiceProperties == SubMenuVariables.subMenuAdd) {
-        add_property_record();
+        add_property_record(scanner);
       } else if (choiceProperties == SubMenuVariables.subMenuEdit) {
-        edit_property_record();
+        edit_property_record(scanner);
       } else if (choiceProperties == SubMenuVariables.subMenuDelete) {
-        delete_property_record();
+        delete_property_record(scanner);
       } else if (choiceProperties == SubMenuVariables.subMenuSearch) {
-        search_property_record();
+        search_property_record(scanner);
       } else if (choiceProperties == SubMenuVariables.subMenuSort) {
         sort_property_record();
       } else if (choiceProperties == SubMenuVariables.subMenuReturn) {
@@ -1467,7 +1448,6 @@ public class RentalManagementLib {
       }
     }
 
-    scanner.close();
     return 0;
   }
   /**
@@ -1475,9 +1455,7 @@ public class RentalManagementLib {
   *
   * @return 0.
   */
-  public int tenantsMenu() {
-    Scanner scanner = new Scanner(System.in);
-
+  public int tenantsMenu(Scanner scanner) {
     while (true) {
       System.out.print("\n--------Tenants--------");
       System.out.print("\n1-)Show Tenants");
@@ -1489,18 +1467,19 @@ public class RentalManagementLib {
       System.out.print("\n7-)Return to Main Menu");
       System.out.print("\nPlease enter a choice: ");
       int choiceTenants = scanner.nextInt();
+      scanner.nextLine();
 
       if (choiceTenants == SubMenuVariables.subMenuShow) {
         System.out.print("\n--------------Tenant Records--------------\n");
         file_read("tenant_records.bin", 'N');
       } else if (choiceTenants == SubMenuVariables.subMenuAdd) {
-        add_tenant_record();
+        add_tenant_record(scanner);
       } else if (choiceTenants == SubMenuVariables.subMenuEdit) {
-        edit_tenant_record();
+        edit_tenant_record(scanner);
       } else if (choiceTenants == SubMenuVariables.subMenuDelete) {
-        delete_tenant_record();
+        delete_tenant_record(scanner);
       } else if (choiceTenants == SubMenuVariables.subMenuSearch) {
-        search_tenant_record();
+        search_tenant_record(scanner);
       } else if (choiceTenants == SubMenuVariables.subMenuSort) {
         sort_tenant_record();
       } else if (choiceTenants == SubMenuVariables.subMenuReturn) {
@@ -1510,7 +1489,6 @@ public class RentalManagementLib {
       }
     }
 
-    scanner.close();
     return 0;
   }
   /**
@@ -1518,9 +1496,7 @@ public class RentalManagementLib {
   *
   * @return 0.
   */
-  public int rentsMenu() {
-    Scanner scanner = new Scanner(System.in);
-
+  public int rentsMenu(Scanner scanner) {
     while (true) {
       System.out.print("\n--------Rent Tracking--------");
       System.out.print("\n1-)Show Rents");
@@ -1537,13 +1513,13 @@ public class RentalManagementLib {
         System.out.print("\n--------------Rent Records--------------\n");
         file_read("rent_records.bin", 'N');
       } else if (choiceRents == SubMenuVariables.subMenuAdd) {
-        add_rent_record();
+        add_rent_record(scanner);
       } else if (choiceRents == SubMenuVariables.subMenuEdit) {
-        edit_rent_record();
+        edit_rent_record(scanner);
       } else if (choiceRents == SubMenuVariables.subMenuDelete) {
-        delete_rent_record();
+        delete_rent_record(scanner);
       } else if (choiceRents == SubMenuVariables.subMenuSearch) {
-        search_rent_record();
+        search_rent_record(scanner);
       } else if (choiceRents == SubMenuVariables.subMenuSort) {
         sort_rent_record();
       } else if (choiceRents == SubMenuVariables.subMenuReturn) {
@@ -1553,7 +1529,6 @@ public class RentalManagementLib {
       }
     }
 
-    scanner.close();
     return 0;
   }
   /**
@@ -1561,9 +1536,7 @@ public class RentalManagementLib {
   *
   * @return 0.
   */
-  public int maintenanceMenu() {
-    Scanner scanner = new Scanner(System.in);
-
+  public int maintenanceMenu(Scanner scanner) {
     while (true) {
       System.out.print("\n--------Maintenance Tracking--------");
       System.out.print("\n1-)Show Maintenances");
@@ -1580,13 +1553,13 @@ public class RentalManagementLib {
         System.out.print("\n--------------Maintenance Records--------------\n");
         file_read("maintenance_records.bin", 'N');
       } else if (choiceMaintenances == SubMenuVariables.subMenuAdd) {
-        add_maintenance_record();
+        add_maintenance_record(scanner);
       } else if (choiceMaintenances == SubMenuVariables.subMenuEdit) {
-        edit_maintenance_record();
+        edit_maintenance_record(scanner);
       } else if (choiceMaintenances == SubMenuVariables.subMenuDelete) {
-        delete_maintenance_record();
+        delete_maintenance_record(scanner);
       } else if (choiceMaintenances == SubMenuVariables.subMenuSearch) {
-        search_maintenance_record();
+        search_maintenance_record(scanner);
       } else if (choiceMaintenances == SubMenuVariables.subMenuSort) {
         sort_maintenance_record();
       } else if (choiceMaintenances == SubMenuVariables.subMenuReturn) {
@@ -1596,17 +1569,47 @@ public class RentalManagementLib {
       }
     }
 
-    scanner.close();
     return 0;
   }
+  /**
+   * @brief Displays the Main menu, allowing the navigate in ap.
+   *
+   * @return 0 indicating the process completed.
+   */
+  public int mainMenu(Scanner scanner) {
+    while (true) {
+      System.out.print("\n--------Main Menu--------");
+      System.out.print("\n1-)Properties");
+      System.out.print("\n2-)Tenants");
+      System.out.print("\n3-)Rent Tracking");
+      System.out.print("\n4-)Maintenance Tracking");
+      System.out.print("\n5-)Log out");
+      System.out.print("\nPlease enter a choice: ");
+      int choiceMainMenu = scanner.nextInt();
 
+      if (choiceMainMenu == MainMenuVariables.mainMenuProperty) {
+        propertiesMenu(scanner);
+      } else if (choiceMainMenu == MainMenuVariables.mainMenuTenant) {
+        tenantsMenu(scanner);
+      } else if (choiceMainMenu == MainMenuVariables.mainMenuRentTracking) {
+        rentsMenu(scanner);
+      } else if (choiceMainMenu == MainMenuVariables.mainMenuMaintenance) {
+        maintenanceMenu(scanner);
+      } else if (choiceMainMenu == MainMenuVariables.mainMenuLogOut) {
+        break;
+      } else {
+        System.out.print("\nPlease input a correct choice.");
+      }
+    }
+
+    return 0;
+  };
   /**
    * @brief Displays the login menu, allowing the user to log in.
    *
    * @return 0 indicating the process completed.
    */
-  public int mainMenu() {
-    Scanner scanner = new Scanner(System.in);
+  public int loginMenu(Scanner scanner) {
     String userFile = "user.bin";
     System.out.print("\nPlease enter your username: ");
     String userName = scanner.next();
@@ -1614,33 +1617,9 @@ public class RentalManagementLib {
     String password = scanner.next();
 
     if (user_login(userName, password, userFile) == 0) {
-      while (true) {
-        System.out.print("\n--------Main Menu--------");
-        System.out.print("\n1-)Properties");
-        System.out.print("\n2-)Tenants");
-        System.out.print("\n3-)Rent Tracking");
-        System.out.print("\n4-)Maintenance Tracking");
-        System.out.print("\n5-)Log out");
-        System.out.print("\nPlease enter a choice: ");
-        int choiceMainMenu = scanner.nextInt();
-
-        if (choiceMainMenu == MainMenuVariables.mainMenuProperty) {
-          propertiesMenu();
-        } else if (choiceMainMenu == MainMenuVariables.mainMenuTenant) {
-          tenantsMenu();
-        } else if (choiceMainMenu == MainMenuVariables.mainMenuRentTracking) {
-          rentsMenu();
-        } else if (choiceMainMenu == MainMenuVariables.mainMenuMaintenance) {
-          maintenanceMenu();
-        } else if (choiceMainMenu == MainMenuVariables.mainMenuLogOut) {
-          break;
-        } else {
-          System.out.print("\nPlease input a correct choice.");
-        }
-      }
+      mainMenu(scanner);
     }
 
-    scanner.close();
     return 0;
   }
 
@@ -1650,8 +1629,7 @@ public class RentalManagementLib {
    *
    * @return 0 indicating the process completed.
    */
-  public int registerMenu() {
-    Scanner scanner = new Scanner(System.in);
+  public int registerMenu(Scanner scanner) {
     String userFile = "user.bin";
     System.out.print("\nPlease enter your new username: ");
     String userName = scanner.next();
@@ -1669,7 +1647,6 @@ public class RentalManagementLib {
       System.out.print("\nProcess terminated.");
     }
 
-    scanner.close();
     return 0;
   }
   /**
@@ -1677,15 +1654,13 @@ public class RentalManagementLib {
    *
    * @return 0 indicating the process completed.
    */
-  public int changePasswordMenu() {
-    Scanner scanner = new Scanner(System.in);
+  public int changePasswordMenu(Scanner scanner) {
     String userFile = "user.bin";
     System.out.print("\nPlease enter your recovery key: ");
     String recoveryKey = scanner.next();
     System.out.print("\nPlease enter your new password: ");
     String password = scanner.next();
     user_change_password(recoveryKey, password, userFile);
-    scanner.close();
     return 0;
   }
 

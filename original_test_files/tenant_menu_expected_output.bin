@@ -7,7 +7,7 @@
 5-)Search Tenants
 6-)Sort Tenants
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter TenantID:
 Please enter PropertyID:
 Please enter Rent:
@@ -22,7 +22,7 @@ Please enter Surname:
 5-)Search Tenants
 6-)Sort Tenants
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter TenantID:
 Please enter PropertyID:
 Please enter Rent:
@@ -37,7 +37,7 @@ Please enter Surname:
 5-)Search Tenants
 6-)Sort Tenants
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter TenantID:
 Please enter PropertyID:
 Please enter Rent:
@@ -52,7 +52,7 @@ Please enter Surname:
 5-)Search Tenants
 6-)Sort Tenants
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter TenantID:
 Please enter PropertyID:
 Please enter Rent:
@@ -67,12 +67,12 @@ Please enter Surname:
 5-)Search Tenants
 6-)Sort Tenants
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 --------------Tenant Records--------------
-1-)TenantID:123 / PropertyID:234 / Rent:345 / BirthDate:22/55/2356 / Name:Alex / Surname:Smith
-2-)TenantID:456 / PropertyID:675 / Rent:978 / BirthDate:22/55/5467 / Name:Jhon / Surname:Stone
-3-)TenantID:12 / PropertyID:234 / Rent:345 / BirthDate:22/55/2356 / Name:Alex / Surname:Smith
-4-)TenantID:765 / PropertyID:675 / Rent:345 / BirthDate:22/55/5467 / Name:Jhon / Surname:Stone
+1-)TenantID:123 / PropertyID:234 / Rent:345 / Birthdate:22/55/2356 / Name:Alex / Surname:Smith
+2-)TenantID:456 / PropertyID:234 / Rent:345 / Birthdate:22/55/2356 / Name:Alex / Surname:Smith
+3-)TenantID:12 / PropertyID:234 / Rent:345 / Birthdate:22/55/2356 / Name:Alex / Surname:Smith
+4-)TenantID:765 / PropertyID:675 / Rent:345 / Birthdate:22/55/5467 / Name:Jhon / Surname:Stone
 
 --------Tenants--------
 1-)Show Tenants
@@ -82,7 +82,7 @@ Please enter a choice:
 5-)Search Tenants
 6-)Sort Tenants
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter record number to edit:
 Please enter TenantID:
 Please enter PropertyID:
@@ -99,13 +99,12 @@ Data successfully edited.
 5-)Search Tenants
 6-)Sort Tenants
 7-)Return to Main Menu
-Please enter a choice:
-------------Tenant Records Sorted By TenantID------------
+Please enter a choice: 
+------------Tenat Records Sorted By TenantID------------
 3-)TenantID:12 / PropertyID:234 / Rent:345 / BirthDate:22/55/2356 / Name:Alex / Surname:Smith
 1-)TenantID:123 / PropertyID:234 / Rent:345 / BirthDate:22/55/2356 / Name:Alex / Surname:Smith
 2-)TenantID:456 / PropertyID:675 / Rent:978 / BirthDate:22/55/5467 / Name:Jhon / Surname:Stone
 4-)TenantID:765 / PropertyID:675 / Rent:345 / BirthDate:22/55/5467 / Name:Jhon / Surname:Stone
-
 --------Tenants--------
 1-)Show Tenants
 2-)Add Tenants
@@ -114,10 +113,9 @@ Please enter a choice:
 5-)Search Tenants
 6-)Sort Tenants
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter the ID of the Tenant you want to find:
-
-There is no such TenantID.
+Tenant ID not found.
 --------Tenants--------
 1-)Show Tenants
 2-)Add Tenants
@@ -126,10 +124,9 @@ There is no such TenantID.
 5-)Search Tenants
 6-)Sort Tenants
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter the ID of the Tenant you want to find:
-
-There is no such TenantID.
+Tenant ID not found.
 --------Tenants--------
 1-)Show Tenants
 2-)Add Tenants
@@ -138,7 +135,7 @@ There is no such TenantID.
 5-)Search Tenants
 6-)Sort Tenants
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please enter record number to delete:
 Data successfully deleted
 --------Tenants--------
@@ -149,7 +146,7 @@ Data successfully deleted
 5-)Search Tenants
 6-)Sort Tenants
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 
 Please input a correct choice.
 --------Tenants--------
 1-)Show Tenants
@@ -159,4 +156,4 @@ Please input a correct choice.
 5-)Search Tenants
 6-)Sort Tenants
 7-)Return to Main Menu
-Please enter a choice:
+Please enter a choice: 

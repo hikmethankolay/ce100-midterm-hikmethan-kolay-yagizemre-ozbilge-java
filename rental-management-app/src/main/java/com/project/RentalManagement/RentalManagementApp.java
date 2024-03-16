@@ -68,11 +68,11 @@ public class RentalManagementApp {
       int choiceLoginMenu = scanner.nextInt();
 
       if (choiceLoginMenu == LoginMenuVariables.loginMenuLogin) {
-        Rental.mainMenu();
+        Rental.loginMenu(scanner);
       } else if (choiceLoginMenu == LoginMenuVariables.loginMenuRegister) {
-        Rental.registerMenu();
+        Rental.registerMenu(scanner);
       } else if (choiceLoginMenu == LoginMenuVariables.loginMenuPasswordReset) {
-        Rental.changePasswordMenu();
+        Rental.changePasswordMenu(scanner);
       } else if (choiceLoginMenu == LoginMenuVariables.loginMenuExit) {
         LoginMenuVariables.run = false;
       } else {

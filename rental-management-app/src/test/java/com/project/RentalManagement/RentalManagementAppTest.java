@@ -9,6 +9,8 @@ package com.project.RentalManagement;
 import static org.junit.Assert.*;
 
 import java.io.*;
+import java.util.Scanner;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -84,9 +86,9 @@ public class RentalManagementAppTest {
     RentalManagementLib lib = new RentalManagementLib();
     // Redirect System.in and System.out from/to test files
     redirectSystemIO("register_menu_input_test.txt", "register_menu_output_test.txt");
-
+    Scanner scanner = new Scanner(System.in);
     // Call the method under test
-    lib.registerMenu();
+    lib.registerMenu(scanner);
 
     // Reset System.in and System.out to their original sources
     resetSystemIO();
@@ -113,8 +115,10 @@ public class RentalManagementAppTest {
     // Redirect System.in and System.out from/to test files
     redirectSystemIO("login_menu_input_test.txt", "login_menu_output_test.txt");
 
+    Scanner scanner = new Scanner(System.in);
     // Call the method under test
-    lib.mainMenu();
+    lib.loginMenu(scanner);
+    scanner.close();
 
     // Reset System.in and System.out to their original sources
     resetSystemIO();
@@ -146,8 +150,9 @@ public class RentalManagementAppTest {
     // Redirect System.in and System.out from/to test files
     redirectSystemIO("change_password_menu_input_test.txt", "change_password_menu_output_test.txt");
 
+    Scanner scanner = new Scanner(System.in);
     // Call the method under test
-    lib.changePasswordMenu();
+    lib.changePasswordMenu(scanner);
 
     // Reset System.in and System.out to their original sources
     resetSystemIO();
@@ -160,6 +165,92 @@ public class RentalManagementAppTest {
 
     // Read the output from the file and compare
     String actualOutput = RentalManagementLib.file_read("change_password_menu_output_test.txt",'Y');
+    assertEquals(expectedOutput, actualOutput);
+  }
+  /**
+   * @brief Tests for properties user menu.
+   *
+   */
+  @Test
+  public void test_04PropertyMenu() throws IOException {
+    RentalManagementLib lib = new RentalManagementLib();
+    // Redirect System.in and System.out from/to test files
+    redirectSystemIO("properties_menu_input_test.txt", "properties_menu_output_test.txt");
+    Scanner scanner = new Scanner(System.in);
+    // Call the method under test
+    lib.propertiesMenu(scanner);
+
+    // Reset System.in and System.out to their original sources
+    resetSystemIO();
+
+    // Read the output from the file and compare
+    String actualOutput = RentalManagementLib.file_read("properties_menu_output_test.txt",'Y');
+    String expectedOutput = RentalManagementLib.file_read("properties_menu_expected_output.bin",'Y');
+    assertEquals(expectedOutput, actualOutput);
+  }
+  /**
+   * @brief Tests for tenant user menu.
+   *
+   */
+  @Test
+  public void test_05TenantMenu() throws IOException {
+    RentalManagementLib lib = new RentalManagementLib();
+    // Redirect System.in and System.out from/to test files
+    redirectSystemIO("tenant_menu_input_test.txt", "tenant_menu_output_test.txt");
+    Scanner scanner = new Scanner(System.in);
+    // Call the method under test
+    lib.tenantsMenu(scanner);
+
+    // Reset System.in and System.out to their original sources
+    resetSystemIO();
+
+    // Read the output from the file and compare
+    String actualOutput = RentalManagementLib.file_read("tenant_menu_output_test.txt",'Y');
+    String expectedOutput = RentalManagementLib.file_read("tenant_menu_expected_output.bin",'Y');
+    assertEquals(expectedOutput, actualOutput);
+  }
+
+  /**
+   * @brief Tests for rents user menu.
+   *
+   */
+  @Test
+  public void test_06RentMenu() throws IOException {
+    RentalManagementLib lib = new RentalManagementLib();
+    // Redirect System.in and System.out from/to test files
+    redirectSystemIO("rent_menu_input_test.txt", "rent_menu_output_test.txt");
+    Scanner scanner = new Scanner(System.in);
+    // Call the method under test
+    lib.rentsMenu(scanner);
+
+    // Reset System.in and System.out to their original sources
+    resetSystemIO();
+
+    // Read the output from the file and compare
+    String actualOutput = RentalManagementLib.file_read("rent_menu_output_test.txt",'Y');
+    String expectedOutput = RentalManagementLib.file_read("rent_menu_expected_output.bin",'Y');
+    assertEquals(expectedOutput, actualOutput);
+  }
+
+  /**
+   * @brief Tests for rents user menu.
+   *
+   */
+  @Test
+  public void test_07MaintenancesMenu() throws IOException {
+    RentalManagementLib lib = new RentalManagementLib();
+    // Redirect System.in and System.out from/to test files
+    redirectSystemIO("maintenance_menu_input_test.txt", "maintenance_menu_output_test.txt");
+    Scanner scanner = new Scanner(System.in);
+    // Call the method under test
+    lib.maintenanceMenu(scanner);
+
+    // Reset System.in and System.out to their original sources
+    resetSystemIO();
+
+    // Read the output from the file and compare
+    String actualOutput = RentalManagementLib.file_read("maintenance_menu_output_test.txt",'Y');
+    String expectedOutput = RentalManagementLib.file_read("maintenance_menu_expected_output.bin",'Y');
     assertEquals(expectedOutput, actualOutput);
   }
 
