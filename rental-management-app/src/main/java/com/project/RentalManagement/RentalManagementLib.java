@@ -753,8 +753,27 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int add_rent_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	    System.out.print("\nPlease enter TenantID:");
+	    int tenantID = scanner.nextInt();
+	    System.out.print("\nPlease enter CurrentRentDebt:");
+	    int currentrentdebt = scanner.nextInt();
+	    System.out.print("\nPlease enter DueDate:");
+	    String duedate = scanner.nextLine();
+	    scanner.nextLine(); // Consume newline left-over
+	    String formattedRecord = String.format("TenantID:%d / CurrentRentDebt:%d / DueDate:%s",tenantID,currentrentdebt,duedate);
+	    File file = new File("rent_records.bin");
+
+	    if (!file.exists()) {
+	      file_write("rent_records.bin",formattedRecord);
+	      scanner.close();
+	      return 0;
+	    } else {
+	      file_append("rent_records.bin",formattedRecord);
+	      scanner.close();
+	      return 0;
+	    }
+	  }
   /**
    * @brief edit rent record.
    *
