@@ -951,7 +951,7 @@ public class RentalManagementLib {
 
     for (TenantInfo tenant : tenants) {
       System.out.printf("%d-)TenantID:%d / PropertyID:%d / Rent:%d / BirthDate:%s / Name:%s / Surname:%s\n",
-                        tenant.tenantID, tenant.propertyID, tenant.rent, tenant.birthDate,
+                        tenant.recordNumber,tenant.tenantID, tenant.propertyID, tenant.rent, tenant.birthDate,
                         tenant.name, tenant.surname);
     }
 
@@ -992,7 +992,7 @@ public class RentalManagementLib {
       TenantInfo foundTenant = tenants.get(indexOfID);
       System.out.print("\n------------Property Record Found By PropertyID------------");
       System.out.printf("%d-)PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%dm2 / Address:%s\n",
-                        foundTenant.tenantID, foundTenant.propertyID, foundTenant.rent, foundTenant.birthDate,
+                        foundTenant.recordNumber,foundTenant.tenantID, foundTenant.propertyID, foundTenant.rent, foundTenant.birthDate,
                         foundTenant.name, foundTenant.surname);
     } else {
       System.out.print("Property ID not found.");
@@ -1032,6 +1032,31 @@ public class RentalManagementLib {
    */
   public static int sort_rent_record() {
     QuickSorter<RentInfo> rentSorter = new QuickSorter<>();
+    String input = file_read("rent_records.bin",'Y');
+
+    if (input == null) {
+      return -1;
+    }
+
+    String[] lines = input.split("\n");
+    ArrayList<RentInfo> rents = new ArrayList<>();
+
+    for (String line : lines) {
+      RentInfo rent = parseRentInfo(line);
+
+      if (rents != null) {
+        rents.add(rent);
+      }
+    }
+
+    rentSorter.quickSort(rents, 0, rents.size() - 1);
+    System.out.print("\n------------Rent Records Sorted By TenantID------------");
+
+    for (RentInfo rent : rents) {
+      System.out.printf("%d-)TenantID:%d / CurrentRentDebt:%d / DueDate:%s\n",
+                        rent.recordNumber,rent.tenantID, rent.currentRentDebt, rent.dueDate);
+    }
+
     return 0;
   }
   /**
@@ -1041,6 +1066,40 @@ public class RentalManagementLib {
    */
   public static int search_rent_record() {
     QuickSorter<RentInfo> rentSorter = new QuickSorter<>();
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("\nPlease enter the ID of the Tenant you want to find:");
+    int TenantIDToFind = scanner.nextInt();
+    String input = file_read("rent_records.bin",'Y');
+
+    if (input == null) {
+      scanner.close();
+      return -1;
+    }
+
+    String[] lines = input.split("\n");
+    ArrayList<RentInfo> rents = new ArrayList<>();
+
+    for (String line : lines) {
+      RentInfo rent = parseRentInfo(line);
+
+      if (rents != null) {
+        rents.add(rent);
+      }
+    }
+
+    rentSorter.quickSort(rents, 0, rents.size() - 1);
+    int indexOfID = rentSorter.recursiveBinarySearch(rents, 0, rents.size()-1, TenantIDToFind);
+
+    if (indexOfID != -1) {
+      RentInfo foundRent = rents.get(indexOfID);
+      System.out.print("\n------------Property Record Found By PropertyID------------");
+      System.out.printf("%d-)TenantID:%d / CurrentRentDebt:%d / DueDate:%s\n",
+                        foundRent.recordNumber,foundRent.tenantID, foundRent.currentRentDebt, foundRent.dueDate);
+    } else {
+      System.out.print("Property ID not found.");
+    }
+
+    scanner.close();
     return 0;
   }
   /**
