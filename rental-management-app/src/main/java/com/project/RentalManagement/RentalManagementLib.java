@@ -894,7 +894,7 @@ public class RentalManagementLib {
 		      scanner.close();
 		      return -1;
 		    }
-		  }
+  }      
   /**
    * @brief delete maintenance record.
    *
