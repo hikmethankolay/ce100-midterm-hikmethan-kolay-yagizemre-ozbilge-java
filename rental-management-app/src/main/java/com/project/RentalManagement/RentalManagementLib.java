@@ -685,8 +685,32 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int edit_tenant_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	  System.out.print("\nPlease enter record number to edit:");
+	    int RecordNumberToEdit = scanner.nextInt();
+	    System.out.print("\nPlease enter TenantID:");
+	    int tenantID = scanner.nextInt();
+	    System.out.print("\nPlease enter PropertyID:");
+	    int propertyID = scanner.nextInt();
+	    System.out.print("\nPlease enter Rent:");
+	    int rent = scanner.nextInt();
+	    System.out.print("\nPlease enter BirthDate:");
+	    String birthdate = scanner.nextLine();
+	    System.out.print("\nPlease enter Name:");
+	    String name = scanner.nextLine();
+	    System.out.print("\nPlease enter Surname:");
+	    String surname = scanner.nextLine();
+	    scanner.nextLine(); // Consume newline left-over
+	    String formattedRecord = String.format("TenantID:%d / PropertyID:%d / Rent:%d / Birthdate:%s / Name:%s / Surname:%s",
+	                                           tenantID,propertyID, rent, birthdate, name, surname);
+	  if (file_edit("tenant_records.bin", RecordNumberToEdit, formattedRecord) == 0) {
+	      scanner.close();
+	      return 0;
+	    } else {
+	      scanner.close();
+	      return -1;
+	    }
+	  }
   /**
    * @brief delete teneat record.
    *
