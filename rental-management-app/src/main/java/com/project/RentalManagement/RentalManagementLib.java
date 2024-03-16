@@ -11,10 +11,12 @@
 @brief The com.project.RentalManagementLib package contains all the classes and files related to the com.project.RentalManagement App.
 */
 package com.project.RentalManagement;
+import java.util.Random;
 import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import ch.qos.logback.classic.Logger;
@@ -74,136 +76,323 @@ public class RentalManagementLib {
     /** Variable for submenu navigation: return. */
     static int subMenuReturn = 7;
   }
-
+  /**
+   * @brief an interface for quick sort that helps sort diffrent type of records with one function.
+   */
+  public interface Identifiable {
+    int getId();
+  }
   /**
    * @brief Represents tenant information including ID, property ID, rent, birth date, name, and surname.
    */
-  static class TenantInfo {
+  public class TenantInfo implements Identifiable {
     /** Record's line number. */
-    static int recordNumber;
+    int recordNumber;
 
     /** Tenant's ID. */
-    static int tenantID;
+    int tenantID;
 
     /** Property's ID associated with the tenant. */
-    static int propertyID;
+    int propertyID;
 
     /** Rent amount. */
-    static int rent;
+    int rent;
 
     /** Tenant's birth date. */
-    static String birthDate;
+    String birthDate;
 
     /** Tenant's name. */
-    static String name;
+    String name;
 
     /** Tenant's surname. */
-    static String surname;
+    String surname;
 
     /** Constructor */
-    public TenantInfo(int tenantID, int propertyID, int rent, String birthDate, String name, String surname) {
-      TenantInfo.tenantID = tenantID;
-      TenantInfo.propertyID = propertyID;
-      TenantInfo.rent = rent;
-      TenantInfo.birthDate = birthDate;
-      TenantInfo.name = name;
-      TenantInfo.surname = surname;
+    public TenantInfo(int recordNumber, int tenantID, int propertyID, int rent, String birthDate, String name, String surname) {
+      this.recordNumber = recordNumber;
+      this.tenantID = tenantID;
+      this.propertyID = propertyID;
+      this.rent = rent;
+      this.birthDate = birthDate;
+      this.name = name;
+      this.surname = surname;
     }
+    /** inherited from Identifiable. */
+    @Override
+    public int getId() {
+      return tenantID;
+    }
+
+
   }
   /**
    * @brief Represents property information including ID, age, bedroom count, living room count, floor count, size, and address.
    */
-  static class PropertyInfo {
+  public class PropertyInfo implements Identifiable {
     /** Record's line number. */
-    static int recordNumber;
+    int recordNumber;
 
     /** Property's ID. */
-    static int propertyID;
+    int propertyID;
 
     /** Property's age. */
-    static int propertyAge;
+    int propertyAge;
 
     /** Bedroom count. */
-    static int bedrooms;
+    int bedrooms;
 
     /** Living room count. */
-    static int livingrooms;
+    int livingrooms;
 
     /** Floor count. */
-    static int floors;
+    int floors;
 
     /** Size of the property. */
-    static int size;
+    int size;
 
     /** Address of the property. */
-    static String address;
+    String address;
 
     /** Constructor */
-    public PropertyInfo(int propertyID, int propertyAge, int bedrooms, int livingRooms, int floors, int size, String address) {
-      PropertyInfo.propertyID = propertyID;
-      PropertyInfo.propertyAge = propertyAge;
-      PropertyInfo.bedrooms = bedrooms;
-      PropertyInfo.livingrooms = livingRooms;
-      PropertyInfo.floors = floors;
-      PropertyInfo.size = size;
-      PropertyInfo.address = address;
+    public PropertyInfo(int recordNumber, int propertyID, int propertyAge, int bedrooms, int livingRooms, int floors, int size, String address) {
+      this.recordNumber = recordNumber;
+      this.propertyID = propertyID;
+      this.propertyAge = propertyAge;
+      this.bedrooms = bedrooms;
+      this.livingrooms = livingRooms;
+      this.floors = floors;
+      this.size = size;
+      this.address = address;
+    }
+    /** inherited from Identifiable. */
+    @Override
+    public int getId() {
+      return propertyID;
     }
 
   }
   /**
    * @brief Represents rent information including record number, tenant ID, current rent debt, and due date.
    */
-  static class RentInfo {
+  public class RentInfo implements Identifiable {
     /** Record's line number. */
-    static int recordNumber;
+    int recordNumber;
 
     /** Tenant's ID that owes rent. */
-    static int tenantID;
+    int tenantID;
 
     /** Current rent debt. */
-    static int currentRentDebt;
+    int currentRentDebt;
 
     /** Rent's due date. */
-    static String dueDate;
+    String dueDate;
 
     /** Constructor */
-    public RentInfo(int tenantID, int currentRentDebt, String dueDate) {
-      RentInfo.tenantID = tenantID;
-      RentInfo.currentRentDebt = currentRentDebt;
-      RentInfo.dueDate = dueDate;
+    public RentInfo(int recordNumber, int tenantID, int currentRentDebt, String dueDate) {
+      this.recordNumber = recordNumber;
+      this.tenantID = tenantID;
+      this.currentRentDebt = currentRentDebt;
+      this.dueDate = dueDate;
+    }
+    /** inherited from Identifiable. */
+    @Override
+    public int getId() {
+      return tenantID;
     }
   }
 
   /**
    * @brief Represents maintenance information including record number, property ID, cost, priority level, maintenance type, and expected finishing date.
    */
-  static class MaintenanceInfo {
+  public class MaintenanceInfo implements Identifiable {
     /** Record's line number. */
-    static int recordNumber;
+    int recordNumber;
 
     /** Property's ID. */
-    static int propertyID;
+    int propertyID;
 
     /** Maintenance cost. */
-    static int cost;
+    int cost;
 
     /** Priority level of the maintenance. */
-    static int priority;
+    int priority;
 
     /** Maintenance type. */
-    static String maintenanceType;
+    String maintenanceType;
 
     /** Expected finishing date of the maintenance. */
-    static String expectedFinishingDate;
+    String expectedFinishingDate;
 
     /** Constructor */
-    public MaintenanceInfo(int propertyID, int cost, int priority, String maintenanceType, String expectedFinishingDate) {
-      MaintenanceInfo.propertyID = propertyID;
-      MaintenanceInfo.cost = cost;
-      MaintenanceInfo.priority = priority;
-      MaintenanceInfo.maintenanceType = maintenanceType;
-      MaintenanceInfo.expectedFinishingDate = expectedFinishingDate;
+    public MaintenanceInfo(int recordNumber, int propertyID, int cost, int priority, String maintenanceType, String expectedFinishingDate) {
+      this.recordNumber = recordNumber;
+      this.propertyID = propertyID;
+      this.cost = cost;
+      this.priority = priority;
+      this.maintenanceType = maintenanceType;
+      this.expectedFinishingDate = expectedFinishingDate;
     }
+
+    /** inherited from Identifiable. */
+    @Override
+    public int getId() {
+      return priority;
+    }
+  }
+
+  static class QuickSorter<T extends Identifiable> {
+
+    private Random random = new Random();
+    /**
+     * @brief Performs the Hoare partition on a segment of the array.
+     *
+     * @param ArrayList The array of elements implementing Identifiable to be partitioned.
+     * @param low The starting index of the segment of the array to be partitioned.
+     * @param high The ending index of the segment of the array to be partitioned.
+     * @return The partition index where elements to the left are less than the pivot and elements to the right are greater.
+     */
+    public int hoarePartition(ArrayList<T> arr, int low, int high) {
+      int pivot = arr.get(low).getId();
+      int i = low - 1, j = high + 1;
+
+      while (true) {
+        do {
+          i++;
+        } while (arr.get(i).getId() < pivot);
+
+        do {
+          j--;
+        } while (arr.get(j).getId() > pivot);
+
+        if (i >= j)
+          return j;
+
+        // Swap arr.get(i) and arr.get(j)
+        T temp = arr.get(i);
+        arr.set(i, arr.get(j));
+        arr.set(j, temp);
+      }
+    }
+    /**
+     * @brief Randomizes the pivot selection for the QuickSort to improve performance on sorted or nearly sorted data.
+     *
+     * @param arr The array to be sorted.
+     * @param low The starting index for the sort segment.
+     * @param high The ending index for the sort segment.
+     * @return The index after partitioning.
+     */
+    public int randomizedPartition(ArrayList<T> arr, int low, int high) {
+      int randomIndex = low + random.nextInt(high - low);
+      T temp = arr.get(randomIndex);
+      arr.set(randomIndex, arr.get(low));
+      arr.set(low, temp);
+      return hoarePartition(arr, low, high);
+    }
+    /**
+     * @brief Sorts an array of objects implementing the Identifiable interface using the QuickSort algorithm.
+     *
+     * @param arr The array to be sorted.
+     * @param low The starting index of the array segment to be sorted.
+     * @param high The ending index of the array segment to be sorted.
+     * @return 0 no matter what.
+     */
+    public void quickSort(ArrayList<T> arr, int low, int high) {
+      if (low < high) {
+        int pi = randomizedPartition(arr, low, high);
+        quickSort(arr, low, pi);
+        quickSort(arr, pi + 1, high);
+      }
+    }
+    /**
+     * @brief Performs a recursive binary search on an array of objects implementing the Identifiable interface.
+     * The array is assumed to be sorted by the identifier.
+     *
+     * @param arr An array of objects implementing the Identifiable interface, sorted by identifier.
+     * @param l The left index of the subarray to be searched (initially 0).
+     * @param r The right index of the subarray to be searched (initially n-1, where n is the number of elements).
+     * @param idToFind The identifier value to search for.
+     * @return The index of the element with the given identifier, or -1 if not found.
+     */
+    public int recursiveBinarySearch(ArrayList<T> arr, int l, int r, int idToFind) {
+      if (r >= l) {
+        int mid = l + (r - l) / 2;
+
+        if (arr.get(mid).getId() == idToFind)
+          return mid;
+
+        if (arr.get(mid).getId() > idToFind)
+          return recursiveBinarySearch(arr, l, mid - 1, idToFind);
+
+        return recursiveBinarySearch(arr, mid + 1, r, idToFind);
+      }
+
+      return -1;
+    }
+  }
+  /**
+   * @brief A method to parse records.
+   *
+   * @param record record string to parse.
+   * @return TenantInfo.
+   */
+  private TenantInfo parseTenantInfo(String record) {
+    String[] parts = record.split(" / ");
+    int recordNumber = Integer.parseInt(parts[0].split(":")[1].trim().replace("-)", ""));
+    int tenantID = Integer.parseInt(parts[1].split(":")[1].trim());
+    int propertyID = Integer.parseInt(parts[2].split(":")[1].trim());
+    int rent = Integer.parseInt(parts[3].split(":")[1].trim());
+    String birthDate = parts[4].split(":")[1].trim();
+    String name = parts[5].split(":")[1].trim();
+    String surname = parts[6].split(":")[1].trim();
+    return new RentalManagementLib().new TenantInfo(recordNumber, tenantID, propertyID, rent, birthDate, name, surname);
+  }
+  /**
+   * @brief A method to parse records.
+   *
+   * @param record record string to parse.
+   * @return RentInfo.
+   */
+  private RentInfo parseRentInfo(String record) {
+    String[] parts = record.split(" / ");
+    int recordNumber = Integer.parseInt(parts[0].split(":")[1].trim());
+    int tenantID = Integer.parseInt(parts[1].split(":")[1].trim());
+    int currentRentDebt = Integer.parseInt(parts[2].split(":")[1].trim());
+    String dueDate = parts[3].split(":")[1].trim();
+    return new RentalManagementLib().new RentInfo(recordNumber, tenantID, currentRentDebt, dueDate);
+  }
+  /**
+   * @brief A method to parse records.
+   *
+   * @param record record string to parse.
+   * @return MaintenanceInfo.
+   */
+  private MaintenanceInfo parseMaintenanceInfo(String record) {
+    String[] parts = record.split(" / ");
+    int recordNumber = Integer.parseInt(parts[0].split(":")[1].trim().replace("-)", ""));
+    int propertyID = Integer.parseInt(parts[1].split(":")[1].trim());
+    int cost = Integer.parseInt(parts[2].split(":")[1].trim());
+    int priority = Integer.parseInt(parts[3].split(":")[1].trim());
+    String maintenanceType = parts[4].split(":")[1].trim();
+    String expectedFinishingDate = parts[5].split(":")[1].trim();
+    return new MaintenanceInfo(recordNumber, propertyID, cost, priority, maintenanceType, expectedFinishingDate);
+  }
+  /**
+   * @brief A method to parse records.
+   *
+   * @param record record string to parse.
+   * @return PropertyInfo.
+   */
+  private static PropertyInfo parsePropertyInfo(String record) {
+    String[] parts = record.split(" / ");
+    int recordNumber = Integer.parseInt(parts[0].split(":")[1].trim().replace("-)", ""));
+    int propertyID = Integer.parseInt(parts[1].split(":")[1].trim());
+    int propertyAge = Integer.parseInt(parts[2].split(":")[1].trim());
+    int bedrooms = Integer.parseInt(parts[3].split(":")[1].trim());
+    int livingrooms = Integer.parseInt(parts[4].split(":")[1].trim());
+    int floors = Integer.parseInt(parts[5].split(":")[1].trim());
+    int size = Integer.parseInt(parts[6].split("m2")[0].split(":")[1].trim());
+    String address = parts[7].split(":")[1].trim();
+    return new RentalManagementLib().new PropertyInfo(recordNumber, propertyID, propertyAge, bedrooms, livingrooms, floors, size, address);
   }
   /**
    * @brief Opens a binary file, deletes all of its content, and writes given text to it.
@@ -560,7 +749,7 @@ public class RentalManagementLib {
     System.out.print("\nPlease enter Size:");
     int size = scanner.nextInt();
     scanner.nextLine(); // Consume newline left-over
-    System.out.println("\nPlease enter Address:");
+    System.out.print("\nPlease enter Address:");
     String address = scanner.nextLine();
     String formattedRecord = String.format("PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%dm2 / Address:%s",
                                            propertyID, propertyAge, bedrooms, livingRooms, floors, size, address);
@@ -635,6 +824,33 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int sort_property_record() {
+    QuickSorter<PropertyInfo> propertySorter = new QuickSorter<>();
+    String input = file_read("property_records.bin",'Y');
+
+    if (input == null) {
+      return -1;
+    }
+
+    String[] lines = input.split("\n");
+    ArrayList<PropertyInfo> properties = new ArrayList<>();
+
+    for (String line : lines) {
+      PropertyInfo property = parsePropertyInfo(line);
+
+      if (property != null) {
+        properties.add(property);
+      }
+    }
+
+    propertySorter.quickSort(properties, 0, properties.size() - 1);
+    System.out.print("\n------------Property Records Sorted By PropertyID------------");
+
+    for (PropertyInfo property : properties) {
+      System.out.printf("%d-)PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%dm2 / Address:%s\n",
+                        property.recordNumber, property.propertyID, property.propertyAge, property.bedrooms,
+                        property.livingrooms, property.floors, property.size, property.address);
+    }
+
     return 0;
   }
   /**
@@ -643,8 +859,45 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int search_property_record() {
+    QuickSorter<PropertyInfo> propertySorter = new QuickSorter<>();
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("\nPlease enter the ID of the Property you want to find:");
+    int propertyIDToFind = scanner.nextInt();
+    String input = file_read("property_records.bin",'Y');
+
+    if (input == null) {
+      scanner.close();
+      return -1;
+    }
+
+    String[] lines = input.split("\n");
+    ArrayList<PropertyInfo> properties = new ArrayList<>();
+
+    for (String line : lines) {
+      PropertyInfo property = parsePropertyInfo(line);
+
+      if (property != null) {
+        properties.add(property);
+      }
+    }
+
+    propertySorter.quickSort(properties, 0, properties.size() - 1);
+    int indexOfID = propertySorter.recursiveBinarySearch(properties, 0, properties.size()-1, propertyIDToFind);
+
+    if (indexOfID != -1) {
+      PropertyInfo foundProperty = properties.get(indexOfID);
+      System.out.print("\n------------Property Record Found By PropertyID------------");
+      System.out.printf("%d-)PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%dm2 / Address:%s\n",
+                        foundProperty.recordNumber, foundProperty.propertyID, foundProperty.propertyAge, foundProperty.bedrooms,
+                        foundProperty.livingrooms, foundProperty.floors, foundProperty.size, foundProperty.address);
+    } else {
+      System.out.print("Property ID not found.");
+    }
+
+    scanner.close();
     return 0;
   }
+
   /**
    * @brief add teneat record.
    *
@@ -675,6 +928,7 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int sort_tenant_record() {
+    QuickSorter<TenantInfo> tenantSorter = new QuickSorter<>();
     return 0;
   }
   /**
@@ -683,6 +937,7 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int search_tenant_record() {
+    QuickSorter<TenantInfo> tenantSorter = new QuickSorter<>();
     return 0;
   }
   /**
@@ -715,6 +970,7 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int sort_rent_record() {
+    QuickSorter<RentInfo> rentSorter = new QuickSorter<>();
     return 0;
   }
   /**
@@ -723,6 +979,7 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int search_rent_record() {
+    QuickSorter<RentInfo> rentSorter = new QuickSorter<>();
     return 0;
   }
   /**
@@ -1023,7 +1280,7 @@ public class RentalManagementLib {
     if (warning == 'Y') {
       user_register(userName, password, recoveryKey, userFile);
     } else {
-      System.out.println("\nProcess terminated.");
+      System.out.print("\nProcess terminated.");
     }
 
     scanner.close();
