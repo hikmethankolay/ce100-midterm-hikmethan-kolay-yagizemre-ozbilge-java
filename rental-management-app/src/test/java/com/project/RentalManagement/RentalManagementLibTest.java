@@ -230,4 +230,12 @@ public class RentalManagementLibTest {
     assertEquals(fail, RentalManagementLib.user_change_password("recoverykeyaa", "newpassword", "usertest.bin"));
   }
 
+  /**
+   * Tests the user_change_password function in a fail case.
+   */
+  @Test
+  public void testUser08_ChangePasswordFail_3() {
+    assertEquals(fail, RentalManagementLib.user_change_password("recoverykeyaa", "newpassword", "usertestttt.bin"));
+  }
+
 }

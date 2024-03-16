@@ -115,7 +115,8 @@ Please enter a choice:
 7-)Return to Main Menu
 Please enter a choice: 
 Please enter the ID of the Tenant you want to find:
-Tenant ID not found.
+------------Tenat Records Found By TenantID------------
+3-)TenantID:12 / PropertyID:234 / Rent:345 / BirthDate:22/55/2356 / Name:Alex / Surname:Smith
 --------Tenants--------
 1-)Show Tenants
 2-)Add Tenants

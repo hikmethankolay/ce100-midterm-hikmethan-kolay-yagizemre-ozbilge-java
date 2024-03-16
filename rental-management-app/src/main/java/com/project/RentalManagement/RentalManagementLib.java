@@ -457,6 +457,7 @@ public class RentalManagementLib {
   * @param fileName The name of the file to append to.
   * @param text     The text to append to the file.
   * @return 0 on success, -1 on failure.
+  * @throws IOException
   */
   public static int file_append(String fileName, String text) {
     File file = new File(fileName);
@@ -488,7 +489,7 @@ public class RentalManagementLib {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
       writer.write(lineNumber + "-)" + text + "\n");
     } catch (IOException e) {
-      System.out.print("\nFile operation failed");
+      System.err.print("\nFile operation failed.");
       return -1;
     }
 
@@ -1050,8 +1051,8 @@ public class RentalManagementLib {
 
     if (indexOfID != -1) {
       TenantInfo foundTenant = tenants.get(indexOfID);
-      System.out.print("\n------------Property Record Found By PropertyID------------");
-      System.out.printf("\n%d-)PropertyID:%d / PropertyAge:%d / Bedrooms:%d / Livingrooms:%d / Floors:%d / Size:%d / Address:%s",
+      System.out.print("\n------------Tenat Records Found By TenantID------------");
+      System.out.printf("\n%d-)TenantID:%d / PropertyID:%d / Rent:%d / BirthDate:%s / Name:%s / Surname:%s",
                         foundTenant.recordNumber,foundTenant.tenantID, foundTenant.propertyID, foundTenant.rent, foundTenant.birthDate,
                         foundTenant.name, foundTenant.surname);
     } else {
