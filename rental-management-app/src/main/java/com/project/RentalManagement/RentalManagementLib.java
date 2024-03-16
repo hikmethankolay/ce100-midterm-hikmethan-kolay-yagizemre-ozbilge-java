@@ -651,8 +651,34 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int add_tenant_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	    System.out.print("\nPlease enter TenantID:");
+	    int tenantID = scanner.nextInt();
+	    System.out.print("\nPlease enter PropertyID:");
+	    int propertyID = scanner.nextInt();
+	    System.out.print("\nPlease enter Rent:");
+	    int rent = scanner.nextInt();
+	    System.out.print("\nPlease enter BirthDate:");
+	    String birthdate = scanner.nextLine();
+	    System.out.print("\nPlease enter Name:");
+	    String name = scanner.nextLine();
+	    System.out.print("\nPlease enter Surname:");
+	    String surname = scanner.nextLine();
+	    scanner.nextLine(); // Consume newline left-over
+	    String formattedRecord = String.format("TenantID:%d / PropertyID:%d / Rent:%d / Birthdate:%s / Name:%s / Surname:%s",
+	                                           tenantID,propertyID, rent, birthdate, name, surname);
+	    File file = new File("tenant_records.bin");
+
+	    if (!file.exists()) {
+	      file_write("tenant_records.bin",formattedRecord);
+	      scanner.close();
+	      return 0;
+	    } else {
+	      file_append("tenant_records.bin",formattedRecord);
+	      scanner.close();
+	      return 0;
+	    }
+	  }
   /**
    * @brief edit teneat record.
    *
