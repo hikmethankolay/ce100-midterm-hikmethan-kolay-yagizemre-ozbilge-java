@@ -15,9 +15,11 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import ch.qos.logback.classic.Logger;
-/**
+import java.util.Scanner;
 
+import ch.qos.logback.classic.Logger;
+
+/**
 @class RentalManagementLib
 @brief This class represents a RentalManagementLib that performs file operations.
 @details The RentalManagementLib class provides methods to perform file operations such as adding, deleting, editing, and sorting..
@@ -25,6 +27,146 @@ import ch.qos.logback.classic.Logger;
 */
 public class RentalManagementLib {
 
+  /**
+  * @brief Represents the variables for the main menu, including the app's logged-in state and navigation options.
+  */
+  static class MainMenuVariables {
+    /** Indicates if a user is logged in. */
+    static boolean loggedIn = true;
+
+    /** Variable for main menu navigation: property. */
+    static int mainMenuProperty = 1;
+
+    /** Variable for main menu navigation: tenant. */
+    static int mainMenuTenant = 2;
+
+    /** Variable for main menu navigation: rent tracking. */
+    static int mainMenuRentTracking = 3;
+
+    /** Variable for main menu navigation: maintenance. */
+    static int mainMenuMaintenance = 4;
+
+    /** Variable for main menu navigation: log out. */
+    static int mainMenuLogOut = 5;
+  }
+  /**
+   * @brief Represents the variables for submenus, facilitating menu navigation.
+   */
+  static class SubMenuVariables {
+    /** Variable for submenu navigation: show. */
+    static int subMenuShow = 1;
+
+    /** Variable for submenu navigation: add. */
+    static int subMenuAdd = 2;
+
+    /** Variable for submenu navigation: edit. */
+    static int subMenuEdit = 3;
+
+    /** Variable for submenu navigation: delete. */
+    static int subMenuDelete = 4;
+
+    /** Variable for submenu navigation: search. */
+    static int subMenuSearch = 5;
+
+    /** Variable for submenu navigation: sort. */
+    static int subMenuSort = 6;
+
+    /** Variable for submenu navigation: return. */
+    static int subMenuReturn = 7;
+  }
+
+  /**
+   * @brief Represents tenant information including ID, property ID, rent, birth date, name, and surname.
+   */
+  static class TenantInfo {
+    /** Record's line number. */
+    static int recordNumber;
+
+    /** Tenant's ID. */
+    static int tenantID;
+
+    /** Property's ID associated with the tenant. */
+    static int propertyID;
+
+    /** Rent amount. */
+    static int rent;
+
+    /** Tenant's birth date. */
+    static String birthDate;
+
+    /** Tenant's name. */
+    static String name;
+
+    /** Tenant's surname. */
+    static String surname;
+  }
+  /**
+   * @brief Represents property information including ID, age, bedroom count, living room count, floor count, size, and address.
+   */
+  static class PropertyInfo {
+    /** Record's line number. */
+    static int recordNumber;
+
+    /** Property's ID. */
+    static int propertyID;
+
+    /** Property's age. */
+    static int propertyAge;
+
+    /** Bedroom count. */
+    static int bedrooms;
+
+    /** Living room count. */
+    static int livingrooms;
+
+    /** Floor count. */
+    static int floors;
+
+    /** Size of the property. */
+    static int size;
+
+    /** Address of the property. */
+    static String address;
+  }
+  /**
+   * @brief Represents rent information including record number, tenant ID, current rent debt, and due date.
+   */
+  static class RentInfo {
+    /** Record's line number. */
+    static int recordNumber;
+
+    /** Tenant's ID that owes rent. */
+    static int tenantID;
+
+    /** Current rent debt. */
+    static int currentRentDebt;
+
+    /** Rent's due date. */
+    static String dueDate;
+  }
+
+  /**
+   * @brief Represents maintenance information including record number, property ID, cost, priority level, maintenance type, and expected finishing date.
+   */
+  static class MaintenanceInfo {
+    /** Record's line number. */
+    static int recordNumber;
+
+    /** Property's ID. */
+    static int propertyID;
+
+    /** Maintenance cost. */
+    static int cost;
+
+    /** Priority level of the maintenance. */
+    static int priority;
+
+    /** Maintenance type. */
+    static String maintenanceType;
+
+    /** Expected finishing date of the maintenance. */
+    static String expectedFinishingDate;
+  }
   /**
    * @brief Opens a binary file, deletes all of its content, and writes given text to it.
    *
@@ -310,12 +452,12 @@ public class RentalManagementLib {
 
       reader.close();
     } catch (IOException e) {
-      System.out.println("\nThere is no user info, Please register first.");
+      System.out.print("\nThere is no user info, Please register first.");
       return -1;
     }
 
     if (recoveryKey.equals(recoveryKeyRead)) {
-      System.out.println("\nRecovery Key Approved");
+      System.out.print("\nRecovery Key Approved");
 
       try {
         BufferedWriter writer = new BufferedWriter(new FileWriter(userFile));
@@ -326,10 +468,10 @@ public class RentalManagementLib {
         return -1;
       }
 
-      System.out.println("\nPassword changed successfully");
+      System.out.print("\nPassword changed successfully");
       return 0;
     } else {
-      System.out.println("\nWrong Recovery Key");
+      System.out.print("\nWrong Recovery Key");
       return -1;
     }
   }
@@ -353,12 +495,454 @@ public class RentalManagementLib {
       fileOutputStream.write(userInfo.getBytes());
       // Close the stream
       fileOutputStream.close();
-      System.out.println("\nRegister is successful and all previous records are deleted.");
+      System.out.print("\nRegister is successful and all previous records are deleted.");
       return 0;
     } catch (IOException e) {
-      System.out.println("Error: " + e.getMessage());
+      System.out.print("Error: " + e.getMessage());
       return -1;
     }
+  }
+  /**
+   * @brief add property record.
+   *
+   * @return 0.
+   */
+  public static int add_property_record() {
+    return 0;
+  }
+  /**
+   * @brief edit property record.
+   *
+   * @return 0.
+   */
+  public static int edit_property_record() {
+    return 0;
+  }
+  /**
+   * @brief delete property record.
+   *
+   * @return 0.
+   */
+  public static int delete_property_record() {
+    return 0;
+  }
+  /**
+   * @brief sort property record.
+   *
+   * @return 0.
+   */
+  public static int sort_property_record() {
+    return 0;
+  }
+  /**
+   * @brief search property record.
+   *
+   * @return 0.
+   */
+  public static int search_property_record() {
+    return 0;
+  }
+  /**
+   * @brief add teneat record.
+   *
+   * @return 0.
+   */
+  public static int add_tenant_record() {
+    return 0;
+  }
+  /**
+   * @brief edit teneat record.
+   *
+   * @return 0.
+   */
+  public static int edit_tenant_record() {
+    return 0;
+  }
+  /**
+   * @brief delete teneat record.
+   *
+   * @return 0.
+   */
+  public static int delete_tenant_record() {
+    return 0;
+  }
+  /**
+   * @brief sort teneat record.
+   *
+   * @return 0.
+   */
+  public static int sort_tenant_record() {
+    return 0;
+  }
+  /**
+   * @brief search teneat record.
+   *
+   * @return 0.
+   */
+  public static int search_tenant_record() {
+    return 0;
+  }
+  /**
+   * @brief add rent record.
+   *
+   * @return 0.
+   */
+  public static int add_rent_record() {
+    return 0;
+  }
+  /**
+   * @brief edit rent record.
+   *
+   * @return 0.
+   */
+  public static int edit_rent_record() {
+    return 0;
+  }
+  /**
+   * @brief delete rent record.
+   *
+   * @return 0.
+   */
+  public static int delete_rent_record() {
+    return 0;
+  }
+  /**
+   * @brief sort rent record.
+   *
+   * @return 0.
+   */
+  public static int sort_rent_record() {
+    return 0;
+  }
+  /**
+   * @brief search rent record.
+   *
+   * @return 0.
+   */
+  public static int search_rent_record() {
+    return 0;
+  }
+  /**
+   * @brief add maintenance record.
+   *
+   * @return 0.
+   */
+  public static int add_maintenance_record() {
+    return 0;
+  }
+  /**
+   * @brief edit maintenance record.
+   *
+   * @return 0.
+   */
+  public static int edit_maintenance_record() {
+    return 0;
+  }
+  /**
+   * @brief delete maintenance record.
+   *
+   * @return 0.
+   */
+  public static int delete_maintenance_record() {
+    return 0;
+  }
+  /**
+   * @brief sort maintenance record.
+   *
+   * @return 0.
+   */
+  public static int sort_maintenance_record() {
+    return 0;
+  }
+  /**
+  * @brief search maintenance record.
+  *
+  * @return 0.
+  */
+  public static int search_maintenance_record() {
+    return 0;
+  }
+  /**
+   * @brief properties menu.
+   *
+   * @return 0.
+   */
+  public int propertiesMenu() {
+    Scanner scanner = new Scanner(System.in);
+
+    while (true) {
+      System.out.print("\n--------Properties--------");
+      System.out.print("\n1-)Show Properties");
+      System.out.print("\n2-)Add Property");
+      System.out.print("\n3-)Edit Properties");
+      System.out.print("\n4-)Delete Properties");
+      System.out.print("\n5-)Search Properties");
+      System.out.print("\n6-)Sort Properties");
+      System.out.print("\n7-)Return to Main Menu");
+      System.out.print("\nPlease enter a choice: ");
+      int choiceProperties = scanner.nextInt();
+
+      if (choiceProperties == SubMenuVariables.subMenuShow) {
+        System.out.print("\n--------------Property Records--------------\n");
+        file_read("property_records.bin",'N');
+      } else if (choiceProperties == SubMenuVariables.subMenuAdd) {
+        add_property_record();
+      } else if (choiceProperties == SubMenuVariables.subMenuEdit) {
+        edit_property_record();
+      } else if (choiceProperties == SubMenuVariables.subMenuDelete) {
+        delete_property_record();
+      } else if (choiceProperties == SubMenuVariables.subMenuSearch) {
+        search_property_record();
+      } else if (choiceProperties == SubMenuVariables.subMenuSort) {
+        sort_property_record();
+      } else if (choiceProperties == SubMenuVariables.subMenuReturn) {
+        break;
+      } else {
+        System.out.print("\nPlease input a correct choice.");
+      }
+    }
+
+    scanner.close();
+    return 0;
+  }
+  /**
+  * @brief tenants menu.
+  *
+  * @return 0.
+  */
+  public int tenantsMenu() {
+    Scanner scanner = new Scanner(System.in);
+
+    while (true) {
+      System.out.print("\n--------Tenants--------");
+      System.out.print("\n1-)Show Tenants");
+      System.out.print("\n2-)Add Tenants");
+      System.out.print("\n3-)Edit Tenants");
+      System.out.print("\n4-)Delete Tenants");
+      System.out.print("\n5-)Search Tenants");
+      System.out.print("\n6-)Sort Tenants");
+      System.out.print("\n7-)Return to Main Menu");
+      System.out.print("\nPlease enter a choice: ");
+      int choiceTenants = scanner.nextInt();
+
+      if (choiceTenants == SubMenuVariables.subMenuShow) {
+        System.out.print("\n--------------Tenant Records--------------\n");
+        file_read("tenant_records.bin", 'N');
+      } else if (choiceTenants == SubMenuVariables.subMenuAdd) {
+        add_tenant_record();
+      } else if (choiceTenants == SubMenuVariables.subMenuEdit) {
+        edit_tenant_record();
+      } else if (choiceTenants == SubMenuVariables.subMenuDelete) {
+        delete_tenant_record();
+      } else if (choiceTenants == SubMenuVariables.subMenuSearch) {
+        search_tenant_record();
+      } else if (choiceTenants == SubMenuVariables.subMenuSort) {
+        sort_tenant_record();
+      } else if (choiceTenants == SubMenuVariables.subMenuReturn) {
+        break;
+      } else {
+        System.out.print("\nPlease input a correct choice.");
+      }
+    }
+
+    scanner.close();
+    return 0;
+  }
+  /**
+  * @brief rents menu.
+  *
+  * @return 0.
+  */
+  public int rentsMenu() {
+    Scanner scanner = new Scanner(System.in);
+
+    while (true) {
+      System.out.print("\n--------Rent Tracking--------");
+      System.out.print("\n1-)Show Rents");
+      System.out.print("\n2-)Add Rents");
+      System.out.print("\n3-)Edit Rents");
+      System.out.print("\n4-)Delete Rents");
+      System.out.print("\n5-)Search Rents");
+      System.out.print("\n6-)Sort Rents");
+      System.out.print("\n7-)Return to Main Menu");
+      System.out.print("\nPlease enter a choice: ");
+      int choiceRents = scanner.nextInt();
+
+      if (choiceRents == SubMenuVariables.subMenuShow) {
+        System.out.print("\n--------------Rent Records--------------\n");
+        file_read("rent_records.bin", 'N');
+      } else if (choiceRents == SubMenuVariables.subMenuAdd) {
+        add_rent_record();
+      } else if (choiceRents == SubMenuVariables.subMenuEdit) {
+        edit_rent_record();
+      } else if (choiceRents == SubMenuVariables.subMenuDelete) {
+        delete_rent_record();
+      } else if (choiceRents == SubMenuVariables.subMenuSearch) {
+        search_rent_record();
+      } else if (choiceRents == SubMenuVariables.subMenuSort) {
+        sort_rent_record();
+      } else if (choiceRents == SubMenuVariables.subMenuReturn) {
+        break;
+      } else {
+        System.out.print("\nPlease input a correct choice.");
+      }
+    }
+
+    scanner.close();
+    return 0;
+  }
+  /**
+  * @brief maintenance menu.
+  *
+  * @return 0.
+  */
+  public int maintenanceMenu() {
+    Scanner scanner = new Scanner(System.in);
+
+    while (true) {
+      System.out.print("\n--------Maintenance Tracking--------");
+      System.out.print("\n1-)Show Maintenances");
+      System.out.print("\n2-)Add Maintenances");
+      System.out.print("\n3-)Edit Maintenances");
+      System.out.print("\n4-)Delete Maintenances");
+      System.out.print("\n5-)Search Maintenances");
+      System.out.print("\n6-)Sort Maintenances");
+      System.out.print("\n7-)Return to Main Menu");
+      System.out.print("\nPlease enter a choice: ");
+      int choiceMaintenances = scanner.nextInt();
+
+      if (choiceMaintenances == SubMenuVariables.subMenuShow) {
+        System.out.print("\n--------------Maintenance Records--------------\n");
+        file_read("maintenance_records.bin", 'N');
+      } else if (choiceMaintenances == SubMenuVariables.subMenuAdd) {
+        add_maintenance_record();
+      } else if (choiceMaintenances == SubMenuVariables.subMenuEdit) {
+        edit_maintenance_record();
+      } else if (choiceMaintenances == SubMenuVariables.subMenuDelete) {
+        delete_maintenance_record();
+      } else if (choiceMaintenances == SubMenuVariables.subMenuSearch) {
+        search_maintenance_record();
+      } else if (choiceMaintenances == SubMenuVariables.subMenuSort) {
+        sort_maintenance_record();
+      } else if (choiceMaintenances == SubMenuVariables.subMenuReturn) {
+        break;
+      } else {
+        System.out.print("\nPlease input a correct choice.");
+      }
+    }
+
+    scanner.close();
+    return 0;
+  }
+  /**
+   * @brief main menu.
+   *
+   * @return 0.
+   */
+  public int mainMenu() {
+    Scanner scanner = new Scanner(System.in);
+
+    while (true) {
+      System.out.print("\n--------Main Menu--------");
+      System.out.print("\n1-)Properties");
+      System.out.print("\n2-)Tenants");
+      System.out.print("\n3-)Rent Tracking");
+      System.out.print("\n4-)Maintenance Tracking");
+      System.out.print("\n5-)Log out");
+      System.out.print("\nPlease enter a choice: ");
+      int choiceMainMenu = scanner.nextInt();
+
+      if (choiceMainMenu == MainMenuVariables.mainMenuProperty) {
+        propertiesMenu();
+      } else if (choiceMainMenu == MainMenuVariables.mainMenuTenant) {
+        tenantsMenu();
+      } else if (choiceMainMenu == MainMenuVariables.mainMenuRentTracking) {
+        rentsMenu();
+      } else if (choiceMainMenu == MainMenuVariables.mainMenuMaintenance) {
+        maintenanceMenu();
+      } else if (choiceMainMenu == MainMenuVariables.mainMenuLogOut) {
+        break;
+      } else {
+        System.out.print("\nPlease input a correct choice.");
+      }
+    }
+
+    scanner.close();
+    return 0;
+  }
+
+  /**
+   * @brief Displays the login menu, allowing the user to log in.
+   *
+   * @return 0 indicating the process completed.
+   */
+  public int loginMenu() {
+    Scanner scanner = new Scanner(System.in);
+    String userName = "";
+    String password = "";
+    String userFile = "user.bin";
+    System.out.print("Please enter your username: ");
+    userName = scanner.next();
+    System.out.print("\nPlease enter your password: ");
+    password = scanner.next();
+
+    if (user_login(userName, password, userFile) == 0) {
+      mainMenu();
+    }
+
+    scanner.close();
+    return 0;
+  }
+
+  /**
+   * @brief Displays the register menu, allowing a new user to register.
+   * This process may delete all previous records if confirmed by the user.
+   *
+   * @return 0 indicating the process completed.
+   */
+  public int registerMenu() {
+    Scanner scanner = new Scanner(System.in);
+    String userName = "";
+    String password = "";
+    String recoveryKey = "";
+    String userFile = "user.bin";
+    char warning;
+    System.out.print("Please enter your new username: ");
+    userName = scanner.next();
+    System.out.print("\nPlease enter your new password: ");
+    password = scanner.next();
+    System.out.print("\nPlease enter your new recovery key: ");
+    recoveryKey = scanner.next();
+    System.out.print("\n------------WARNING------------");
+    System.out.print("\nThis process will delete all previous records, do you still wish to proceed?[Y/n]: ");
+    warning = scanner.next().charAt(0);
+
+    if (warning == 'Y') {
+      user_register(userName, password, recoveryKey, userFile);
+    } else {
+      System.out.println("\nProcess terminated.");
+    }
+
+    scanner.close();
+    return 0;
+  }
+  /**
+   * @brief Displays the change password menu, allowing users to change their password using a recovery key.
+   *
+   * @return 0 indicating the process completed.
+   */
+  public int changePasswordMenu() {
+    Scanner scanner = new Scanner(System.in);
+    String password = "";
+    String recoveryKey = "";
+    String userFile = "user.bin";
+    System.out.print("\nPlease enter your recovery key: ");
+    recoveryKey = scanner.next();
+    System.out.print("\nPlease enter your new password: ");
+    password = scanner.next();
+    user_change_password(recoveryKey, password, userFile);
+    scanner.close();
+    return 0;
   }
 
 }
