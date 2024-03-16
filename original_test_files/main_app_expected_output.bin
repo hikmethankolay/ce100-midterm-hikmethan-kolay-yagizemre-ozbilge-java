@@ -1,0 +1,44 @@
+
+--------Login Menu--------
+1-)Login
+2-)Register
+3-)Change Password
+4-)Exit
+Please enter a choice: 
+Please enter your username: 
+Please enter your password: 
+Wrong username or password
+--------Login Menu--------
+1-)Login
+2-)Register
+3-)Change Password
+4-)Exit
+Please enter a choice: 
+Please enter your new username: 
+Please enter your new password: 
+Please enter your new recovery key: 
+------------WARNING------------
+This process will delete all previous records, do you still wish to proceed?[Y/n]: 
+Process terminated.
+--------Login Menu--------
+1-)Login
+2-)Register
+3-)Change Password
+4-)Exit
+Please enter a choice: 
+Please enter your recovery key: 
+Please enter your new password: 
+Wrong Recovery Key
+--------Login Menu--------
+1-)Login
+2-)Register
+3-)Change Password
+4-)Exit
+Please enter a choice: 
+Please input a correct choice.
+--------Login Menu--------
+1-)Login
+2-)Register
+3-)Change Password
+4-)Exit
+Please enter a choice: 

@@ -18,7 +18,7 @@ import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
+import com.project.RentalManagement.RentalManagementApp;
 
 /**
 
@@ -273,6 +273,28 @@ public class RentalManagementAppTest {
     // Read the output from the file and compare
     String actualOutput = RentalManagementLib.file_read("main_menu_output_test.txt",'Y');
     String expectedOutput = RentalManagementLib.file_read("main_menu_expected_output.bin",'Y');
+    assertEquals(expectedOutput, actualOutput);
+  }
+
+  /**
+   * @brief Tests for rents main menu.
+   *
+   */
+  @Test
+  public void test_09MainApp() throws IOException {
+
+    // Redirect System.in and System.out from/to test files
+    redirectSystemIO("main_app_input_test.txt", "main_app_output_test.txt");
+
+    // Call the method under test
+    RentalManagementApp.main(null);
+
+    // Reset System.in and System.out to their original sources
+    resetSystemIO();
+
+    // Read the output from the file and compare
+    String actualOutput = RentalManagementLib.file_read("main_app_output_test.txt",'Y');
+    String expectedOutput = RentalManagementLib.file_read("main_app_expected_output.bin",'Y');
     assertEquals(expectedOutput, actualOutput);
   }
 

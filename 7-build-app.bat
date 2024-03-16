@@ -85,7 +85,6 @@ cd rental-management-app
 echo Perform Maven site generation
 call mvn site
 
-
 del test1.bin
 del test2.bin
 del test3.bin
@@ -97,7 +96,6 @@ del *_records.bin
 del *_test.bin
 del *_test.txt
 del *_output.bin
-
 
 cd ..
 

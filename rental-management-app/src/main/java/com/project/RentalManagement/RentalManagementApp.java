@@ -59,11 +59,11 @@ public class RentalManagementApp {
     Scanner scanner = new Scanner(System.in);
 
     while (LoginMenuVariables.run) {
-      System.out.println("\n--------Login Menu--------");
-      System.out.println("\n1-)Login");
-      System.out.println("\n2-)Register");
-      System.out.println("\n3-)Change Password");
-      System.out.println("\n4-)Exit");
+      System.out.print("\n--------Login Menu--------");
+      System.out.print("\n1-)Login");
+      System.out.print("\n2-)Register");
+      System.out.print("\n3-)Change Password");
+      System.out.print("\n4-)Exit");
       System.out.print("\nPlease enter a choice: ");
       int choiceLoginMenu = scanner.nextInt();
 
@@ -76,7 +76,7 @@ public class RentalManagementApp {
       } else if (choiceLoginMenu == LoginMenuVariables.loginMenuExit) {
         LoginMenuVariables.run = false;
       } else {
-        System.out.println("\nPlease input a correct choice.");
+        System.out.print("\nPlease input a correct choice.");
       }
     }
 
