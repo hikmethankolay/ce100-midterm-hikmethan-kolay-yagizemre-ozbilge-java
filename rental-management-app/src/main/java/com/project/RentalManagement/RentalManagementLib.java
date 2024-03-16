@@ -806,8 +806,18 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int delete_rent_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	    System.out.print("\nPlease enter record number to delete:");
+	    int RecordNumberToDelete = scanner.nextInt();
+
+	    if (file_line_delete("rent_records.bin", RecordNumberToDelete) == 0) {
+	      scanner.close();
+	      return 0;
+	    } else {
+	      scanner.close();
+	      return -1;
+	    }
+	  }
   /**
    * @brief sort rent record.
    *
