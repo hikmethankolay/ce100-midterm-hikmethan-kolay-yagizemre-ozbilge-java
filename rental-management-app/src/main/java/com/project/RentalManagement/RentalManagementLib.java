@@ -780,8 +780,26 @@ public class RentalManagementLib {
    * @return 0.
    */
   public static int edit_rent_record() {
-    return 0;
-  }
+	  Scanner scanner = new Scanner(System.in);
+	  System.out.print("\nPlease enter record number to edit:");
+	    int RecordNumberToEdit = scanner.nextInt();
+	    System.out.print("\nPlease enter TenantID:");
+	    int tenantID = scanner.nextInt();
+	    System.out.print("\nPlease enter CurrentRentDebt:");
+	    int currentrentdebt = scanner.nextInt();
+	    System.out.print("\nPlease enter DueDate:");
+	    String duedate = scanner.nextLine();
+	    scanner.nextLine(); // Consume newline left-over
+	    String formattedRecord = String.format("TenantID:%d / CurrentRentDebt:%d / DueDate:%s",tenantID,currentrentdebt,duedate);
+	    
+	  if (file_edit("rent_records.bin", RecordNumberToEdit, formattedRecord) == 0) {
+	      scanner.close();
+	      return 0;
+	    } else {
+	      scanner.close();
+	      return -1;
+	    }
+	  }
   /**
    * @brief delete rent record.
    *
