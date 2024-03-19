@@ -66,6 +66,8 @@ jobs:
       - name: Perform Maven clean, test, and packaging
         run: mvn clean test package
         working-directory: ./rental-management-app
+        env:
+          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
 
       - name: Generate Folders
         run: |
