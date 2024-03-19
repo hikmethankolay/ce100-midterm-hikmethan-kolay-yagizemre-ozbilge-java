@@ -86,8 +86,14 @@ jobs:
           # Check if coverage is bigger than 95%
           if (( $(echo "$coverage_percentage >= 95" | bc -l) )); then
             echo "Test coverage is bigger than 95%!"
+            echo "Coverage Percentage: $coverage_percentage"
+            echo "Covered: $covered"
+            echo "Missed: $missed"
           else
             echo "Test coverage is not bigger than 95%."
+            echo "Coverage Percentage: $coverage_percentage"
+            echo "Covered: $covered"
+            echo "Missed: $missed"
             exit 1  # Fail the GitHub Actions workflow
           fi
           echo "Coverage Percentage: $coverage_percentage"
