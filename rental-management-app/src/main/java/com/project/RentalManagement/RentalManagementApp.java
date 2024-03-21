@@ -10,11 +10,8 @@
 @brief The com.project.RentalManagement package contains all the classes and files related to the RentalManagement App.
 */
 package com.project.RentalManagement;
-import java.io.IOException;
 import java.util.Scanner;
-import org.slf4j.LoggerFactory;
-import com.project.RentalManagement.RentalManagementLib;
-import ch.qos.logback.classic.Logger;
+
 
 /**
  *

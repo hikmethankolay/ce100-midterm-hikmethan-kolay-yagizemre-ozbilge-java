@@ -13,13 +13,11 @@
 package com.project.RentalManagement;
 import java.util.Random;
 import java.util.Collections;
-import org.slf4j.LoggerFactory;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import ch.qos.logback.classic.Logger;
+
 
 /**
 @class RentalManagementLib
